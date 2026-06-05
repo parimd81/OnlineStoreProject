@@ -1,4 +1,4 @@
-package com.company;
+package com.online.store;
 
 public class Main {
 
