@@ -4,7 +4,6 @@ import com.online.store.model.products.Product;
 import java.time.LocalDate;
 
 public class FoodProduct extends Product {
-
     private LocalDate expiryDate;
 
     public FoodProduct(String id, String name, double price, int stock, LocalDate expiryDate) {
@@ -13,4 +12,5 @@ public class FoodProduct extends Product {
     }
 
     public LocalDate getExpiryDate() { return expiryDate; }
+    public void setExpiryDate(LocalDate expiryDate) { this.expiryDate = expiryDate; }
 }

@@ -1,17 +1,18 @@
 package com.online.store.model.products.vehicle;
 
 public class Car extends Vehicle {
-
     private int engineCapacity;
-    private boolean automatic;
+    private boolean isAutomatic;
 
-    public Car(String id, String name, double price, int stock,
-               String manufacturer, int engineCapacity, boolean automatic) {
+    public Car(String id, String name, double price, int stock, String manufacturer, int engineCapacity, boolean isAutomatic) {
         super(id, name, price, stock, manufacturer);
         this.engineCapacity = engineCapacity;
-        this.automatic = automatic;
+        this.isAutomatic = isAutomatic;
     }
 
     public int getEngineCapacity() { return engineCapacity; }
-    public boolean isAutomatic() { return automatic; }
+    public void setEngineCapacity(int engineCapacity) { this.engineCapacity = engineCapacity; }
+
+    public boolean isAutomatic() { return isAutomatic; }
+    public void setAutomatic(boolean automatic) { isAutomatic = automatic; }
 }

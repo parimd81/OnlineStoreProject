@@ -3,7 +3,6 @@ package com.online.store.model.products.digital;
 import com.online.store.model.products.Product;
 
 public abstract class DigitalProduct extends Product {
-
     private String brand;
 
     public DigitalProduct(String id, String name, double price, int stock, String brand) {
@@ -12,4 +11,5 @@ public abstract class DigitalProduct extends Product {
     }
 
     public String getBrand() { return brand; }
+    public void setBrand(String brand) { this.brand = brand; }
 }

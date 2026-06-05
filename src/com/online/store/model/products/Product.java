@@ -1,7 +1,6 @@
 package com.online.store.model.products;
 
 public abstract class Product {
-
     private String id;
     private String name;
     private double price;
@@ -14,6 +13,7 @@ public abstract class Product {
         this.stock = stock;
     }
 
+    // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
