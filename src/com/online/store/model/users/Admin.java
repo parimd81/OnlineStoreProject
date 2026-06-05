@@ -1,19 +1,16 @@
-package model.users;
+package com.online.store.model.users;
 
 public class Admin extends User {
-
-    // تنها instance از Admin
     private static Admin instance;
 
-    // constructor خصوصی → جلوگیری از ساختن مستقیم
+    // کانستراکتور Private برای جلوگیری از new کردن بیرون کلاس
     private Admin(String username, String email, String phoneNumber, String password) {
         super(username, email, phoneNumber, password);
     }
 
-    // متد Singleton برای گرفتن instance
-    public static Admin getInstance(String username, String email, String phoneNumber, String password) {
+    public static Admin getInstance() {
         if (instance == null) {
-            instance = new Admin(username, email, phoneNumber, password);
+            instance = new Admin("admin", "admin@store.com", "09123456789", "Admin123");
         }
         return instance;
     }

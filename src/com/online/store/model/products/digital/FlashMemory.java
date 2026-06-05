@@ -1,8 +1,14 @@
-package com.online.store.model.products.digital;
+package com.online.store.model.products.stationery;
 
-public class FlashMemory extends DigitalProduct {
+import com.online.store.model.products.Product;
 
-    public FlashMemory(int id, String name, double price, int stock, double fileSize) {
-        super(id, name, price, stock, fileSize);
+public abstract class Stationery extends Product {
+    private String countryOfOrigin;
+
+    public Stationery(String id, String name, double price, int stock, String countryOfOrigin) {
+        super(id, name, price, stock);
+        this.countryOfOrigin = countryOfOrigin;
     }
+
+    public String getCountryOfOrigin() { return countryOfOrigin; }
 }

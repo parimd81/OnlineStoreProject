@@ -1,11 +1,12 @@
 package com.online.store.model.products.vehicle;
 
 public class Bicycle extends Vehicle {
+    private String type; // مثلاً کوهستانی، شهری
 
-    private BicycleType type;
-
-    public Bicycle(int id, String name, double price, int stock, double engineVolume, BicycleType type) {
-        super(id, name, price, stock, engineVolume);
+    public Bicycle(String id, String name, double price, int stock, String manufacturer, String type) {
+        super(id, name, price, stock, manufacturer);
         this.type = type;
     }
+
+    public String getType() { return type; }
 }

@@ -1,22 +1,15 @@
-package com.online.store.model.products;
+package com.online.store.model.products.vehicle;
 
-public abstract class Product {
-    private String id;
-    private String name;
-    private double price;
-    private int stock;
+import com.online.store.model.products.Product;
 
-    public Product(String id, String name, double price, int stock) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
+public abstract class Vehicle extends Product {
+    private String manufacturer;
+
+    public Vehicle(String id, String name, double price, int stock, String manufacturer) {
+        super(id, name, price, stock);
+        this.manufacturer = manufacturer;
     }
 
-    // Getters & Setters
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public double getPrice() { return price; }
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
+    public String getManufacturer() { return manufacturer; }
+    public void setManufacturer(String manufacturer) { this.manufacturer = manufacturer; }
 }

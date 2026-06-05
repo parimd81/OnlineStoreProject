@@ -1,11 +1,12 @@
 package com.online.store.model.products.stationery;
 
 public class Pencil extends Stationery {
+    private String hardness; // مثلاً HB, 2B
 
-    private PencilType type;
-
-    public Pencil(int id, String name, double price, int stock, PencilType type) {
-        super(id, name, price, stock);
-        this.type = type;
+    public Pencil(String id, String name, double price, int stock, String countryOfOrigin, String hardness) {
+        super(id, name, price, stock, countryOfOrigin);
+        this.hardness = hardness;
     }
+
+    public String getHardness() { return hardness; }
 }
