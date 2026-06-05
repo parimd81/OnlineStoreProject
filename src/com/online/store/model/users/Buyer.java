@@ -1,13 +1,22 @@
 package com.online.store.model.users;
 
-public class Buyer extends User {
-    private double walletBalance;
+public class Admin extends User {
 
-    public Buyer(String username, String email, String phoneNumber, String password, double walletBalance) {
+    private static Admin instance;
+
+    private Admin(String username, String email, String phoneNumber, String password) {
         super(username, email, phoneNumber, password);
-        this.walletBalance = walletBalance;
     }
 
-    public double getWalletBalance() { return walletBalance; }
-    public void setWalletBalance(double walletBalance) { this.walletBalance = walletBalance; }
+    public static Admin getInstance() {
+        if (instance == null) {
+            instance = new Admin(
+                    "admin",
+                    "admin@store.com",
+                    "09123456789",
+                    "Admin123"
+            );
+        }
+        return instance;
+    }
 }

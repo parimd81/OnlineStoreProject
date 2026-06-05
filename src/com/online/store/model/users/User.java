@@ -1,6 +1,7 @@
 package com.online.store.model.users;
 
 public abstract class User {
+
     private String username;
     private String email;
     private String phoneNumber;
@@ -13,7 +14,6 @@ public abstract class User {
         this.password = password;
     }
 
-    // Getters and Setters
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
