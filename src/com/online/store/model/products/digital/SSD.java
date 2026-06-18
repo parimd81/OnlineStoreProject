@@ -31,8 +31,14 @@ public class SSD extends DigitalProduct {
 
     @Override
     public String toString() {
+
         return "SSD{" +
-                "capacityGB=" + capacityGB +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", stock=" + getStock() +
+                ", brand='" + getBrand() + '\'' +
+                ", capacityGB=" + capacityGB +
                 '}';
     }
 }

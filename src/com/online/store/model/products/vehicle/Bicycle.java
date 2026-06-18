@@ -14,7 +14,6 @@ public class Bicycle extends Vehicle {
                    String manufacturer,
                    String bicycleType) {
 
-
         super(id, name, price, stock, manufacturer);
 
         this.bicycleType = bicycleType;
@@ -33,8 +32,14 @@ public class Bicycle extends Vehicle {
 
     @Override
     public String toString() {
+
         return "Bicycle{" +
-                "bicycleType='" + bicycleType + '\'' +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", stock=" + getStock() +
+                ", manufacturer='" + getManufacturer() + '\'' +
+                ", bicycleType='" + bicycleType + '\'' +
                 '}';
     }
 }

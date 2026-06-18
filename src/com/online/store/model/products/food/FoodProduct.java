@@ -4,10 +4,15 @@ import com.online.store.model.products.Product;
 
 import java.time.LocalDate;
 
+
 public class FoodProduct extends Product {
 
+
     private LocalDate productionDate;
+
     private LocalDate expirationDate;
+
+
 
 
     public FoodProduct(String id,
@@ -17,38 +22,72 @@ public class FoodProduct extends Product {
                        LocalDate productionDate,
                        LocalDate expirationDate) {
 
+
         super(id, name, price, stock);
 
+
         this.productionDate = productionDate;
+
         this.expirationDate = expirationDate;
+
     }
+
+
+
 
 
     public LocalDate getProductionDate() {
+
         return productionDate;
+
     }
+
+
 
 
     public void setProductionDate(LocalDate productionDate) {
+
         this.productionDate = productionDate;
+
     }
+
+
 
 
     public LocalDate getExpirationDate() {
+
         return expirationDate;
+
     }
+
+
 
 
     public void setExpirationDate(LocalDate expirationDate) {
+
         this.expirationDate = expirationDate;
+
     }
+
+
+
+
+
 
 
     @Override
     public String toString() {
+
+
         return "FoodProduct{" +
-                "productionDate=" + productionDate +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", stock=" + getStock() +
+                ", productionDate=" + productionDate +
                 ", expirationDate=" + expirationDate +
                 '}';
+
     }
+
 }

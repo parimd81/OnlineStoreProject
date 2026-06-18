@@ -31,8 +31,14 @@ public class Pencil extends Stationery {
 
     @Override
     public String toString() {
+
         return "Pencil{" +
-                "hardness='" + hardness + '\'' +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", stock=" + getStock() +
+                ", brand='" + getBrand() + '\'' +
+                ", hardness='" + hardness + '\'' +
                 '}';
     }
 }

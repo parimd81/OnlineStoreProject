@@ -31,8 +31,14 @@ public class FlashMemory extends DigitalProduct {
 
     @Override
     public String toString() {
+
         return "FlashMemory{" +
-                "usbVersion=" + usbVersion +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", stock=" + getStock() +
+                ", brand='" + getBrand() + '\'' +
+                ", usbVersion=" + usbVersion +
                 '}';
     }
 }
