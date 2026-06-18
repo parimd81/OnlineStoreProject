@@ -3,17 +3,21 @@ package com.online.store.controller;
 
 import com.online.store.model.users.Buyer;
 import com.online.store.model.users.User;
-import com.online.store.utils.SessionManager;
-import com.online.store.utils.ValidationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class AuthController {
 
 
     private List<User> users;
+
+
+
+    private User currentUser;
+
 
 
     public AuthController() {
@@ -24,41 +28,21 @@ public class AuthController {
 
 
 
-    public boolean register(String username,
-                            String email,
-                            String phone,
-                            String password) {
 
 
-        // بررسی اطلاعات
+    // ثبت نام
 
-        if(!ValidationUtils.isValidEmail(email)) {
-
-            System.out.println("Invalid email");
-            return false;
-        }
-
-
-        if(!ValidationUtils.isValidPhone(phone)) {
-
-            System.out.println("Invalid phone");
-            return false;
-        }
-
-
-        if(!ValidationUtils.isValidPassword(password)) {
-
-            System.out.println("Invalid password");
-            return false;
-        }
-
+    public Buyer register(String username,
+                          String email,
+                          String phoneNumber,
+                          String password) {
 
 
         Buyer buyer =
                 new Buyer(
                         username,
                         email,
-                        phone,
+                        phoneNumber,
                         password,
                         0
                 );
@@ -67,12 +51,15 @@ public class AuthController {
         users.add(buyer);
 
 
-        return true;
+        return buyer;
+
     }
 
 
 
 
+
+    // ورود
 
     public boolean login(String username,
                          String password) {
@@ -86,31 +73,53 @@ public class AuthController {
                     user.getPassword().equals(password)) {
 
 
-                SessionManager
-                        .getInstance()
-                        .setCurrentUser(user);
+                currentUser = user;
 
 
                 return true;
+
             }
+
         }
 
 
         return false;
+
     }
 
 
 
 
+
+    // خروج
 
     public void logout() {
 
 
-        SessionManager
-                .getInstance()
-                .logout();
+        currentUser = null;
 
     }
 
+
+
+
+
+    public User getCurrentUser() {
+
+
+        return currentUser;
+
+    }
+
+
+
+
+
+    public List<User> getUsers() {
+
+
+        return users;
+
+    }
 
 }
