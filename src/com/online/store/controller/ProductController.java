@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class ProductController {
 
 
@@ -42,7 +43,7 @@ public class ProductController {
 
 
 
-    // گرفتن همه محصولات
+    // دریافت تمام محصولات
 
     public List<Product> getAllProducts() {
 
@@ -52,7 +53,7 @@ public class ProductController {
 
 
 
-    // پیدا کردن محصول با id
+    // پیدا کردن محصول با شناسه
 
     public Product findById(String id) {
 
@@ -65,12 +66,13 @@ public class ProductController {
                 return product;
 
             }
-
         }
 
 
         return null;
     }
+
+
 
 
 
@@ -88,6 +90,66 @@ public class ProductController {
             if(product.getName()
                     .toLowerCase()
                     .contains(keyword.toLowerCase())) {
+
+
+                result.add(product);
+
+            }
+        }
+
+
+        return result;
+
+    }
+
+
+
+
+
+    // فیلتر بر اساس قیمت
+
+    public List<Product> filterByPrice(double min,
+                                       double max) {
+
+
+        List<Product> result = new ArrayList<>();
+
+
+        for(Product product : products) {
+
+
+            if(product.getPrice() >= min
+                    &&
+                    product.getPrice() <= max) {
+
+
+                result.add(product);
+
+            }
+
+        }
+
+
+        return result;
+
+    }
+
+
+
+
+
+    // فیلتر محصولات موجود
+
+    public List<Product> filterAvailableProducts() {
+
+
+        List<Product> result = new ArrayList<>();
+
+
+        for(Product product : products) {
+
+
+            if(product.getStock() > 0) {
 
 
                 result.add(product);
