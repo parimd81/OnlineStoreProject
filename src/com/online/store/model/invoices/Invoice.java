@@ -29,8 +29,11 @@ public class Invoice {
 
 
         this.invoiceId = invoiceId;
+
         this.buyer = buyer;
+
         this.items = items;
+
         this.date = LocalDate.now();
 
 
@@ -92,6 +95,7 @@ public class Invoice {
     public void setItems(List<CartItem> items) {
 
         this.items = items;
+
         calculateTotal();
     }
 
@@ -113,7 +117,6 @@ public class Invoice {
 
     @Override
     public String toString() {
-
 
         return "Invoice{" +
                 "invoiceId=" + invoiceId +
