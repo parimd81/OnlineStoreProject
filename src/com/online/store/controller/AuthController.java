@@ -17,10 +17,6 @@ public class AuthController {
     private List<User> users;
 
 
-    private User currentUser;
-
-
-
 
     public AuthController() {
 
@@ -28,15 +24,10 @@ public class AuthController {
         users = new ArrayList<>();
 
 
-        // ساخت ادمین پیش فرض
+        // اضافه کردن Admin پیش فرض
 
         users.add(
-                Admin.getInstance(
-                        "admin",
-                        "admin@store.com",
-                        "09123456789",
-                        "admin123"
-                )
+                Admin.getInstance()
         );
 
     }
@@ -46,14 +37,10 @@ public class AuthController {
 
 
 
-
-    // ثبت نام Buyer
-
     public void register(String username,
                          String email,
                          String phone,
                          String password) {
-
 
 
         Buyer buyer =
@@ -62,9 +49,8 @@ public class AuthController {
                         email,
                         phone,
                         password,
-                        10000
+                        0
                 );
-
 
 
         users.add(buyer);
@@ -77,16 +63,11 @@ public class AuthController {
 
 
 
-
-    // ورود کاربر
-
     public boolean login(String username,
                          String password) {
 
 
-
         for(User user : users) {
-
 
 
             if(user.getUsername()
@@ -96,16 +77,11 @@ public class AuthController {
                             .equals(password)) {
 
 
-
-                currentUser = user;
-
-
                 return true;
 
             }
 
         }
-
 
 
         return false;
@@ -118,32 +94,29 @@ public class AuthController {
 
 
 
-
-    // گرفتن کاربر وارد شده
-
-    public User getCurrentUser() {
+    public User getUser(String username,
+                        String password) {
 
 
-        return currentUser;
+        for(User user : users) {
+
+
+            if(user.getUsername()
+                    .equals(username)
+                    &&
+                    user.getPassword()
+                            .equals(password)) {
+
+
+                return user;
+
+            }
+
+        }
+
+
+        return null;
 
     }
-
-
-
-
-
-
-
-
-    // خروج
-
-    public void logout() {
-
-
-        currentUser = null;
-
-    }
-
-
 
 }
