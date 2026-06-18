@@ -1,7 +1,5 @@
 package com.online.store.model.products.vehicle;
 
-import com.online.store.model.products.Product;
-
 public abstract class Vehicle extends Product {
     private String manufacturer;
 

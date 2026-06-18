@@ -1,7 +1,5 @@
 package com.online.store.model.products.digital;
 
-import com.online.store.model.products.Product;
-
 public abstract class DigitalProduct extends Product {
     private String brand;
 

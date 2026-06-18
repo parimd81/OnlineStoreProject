@@ -1,6 +1,5 @@
 package com.online.store.model.products.food;
 
-import com.online.store.model.products.Product;
 import java.time.LocalDate;
 
 public class FoodProduct extends Product {
