@@ -1,10 +1,15 @@
 package com.online.store.view;
 
 
+import com.online.store.controller.AdminController;
 import com.online.store.controller.AuthController;
 import com.online.store.controller.CartController;
 import com.online.store.controller.ProductController;
+
+
+import com.online.store.model.users.Admin;
 import com.online.store.model.users.Buyer;
+import com.online.store.model.users.User;
 
 
 import java.util.Scanner;
@@ -20,6 +25,11 @@ public class MainView {
     private AuthController authController;
 
 
+    // کنترلر مشترک محصولات برای کل برنامه
+    private ProductController productController;
+
+
+
 
 
     public MainView() {
@@ -28,9 +38,19 @@ public class MainView {
         scanner = new Scanner(System.in);
 
 
-        authController = new AuthController();
+
+        authController =
+                new AuthController();
+
+
+
+        // فقط یک نمونه از ProductController
+        productController =
+                new ProductController();
 
     }
+
+
 
 
 
@@ -44,9 +64,12 @@ public class MainView {
 
             System.out.println("\n===== Online Store =====");
 
+
             System.out.println("1. Register");
 
+
             System.out.println("2. Login");
+
 
             System.out.println("3. Exit");
 
@@ -55,8 +78,10 @@ public class MainView {
 
 
 
+
             int choice =
                     scanner.nextInt();
+
 
 
             scanner.nextLine();
@@ -64,7 +89,9 @@ public class MainView {
 
 
 
+
             switch(choice) {
+
 
 
                 case 1:
@@ -72,6 +99,8 @@ public class MainView {
                     register();
 
                     break;
+
+
 
 
 
@@ -83,17 +112,25 @@ public class MainView {
 
 
 
+
+
                 case 3:
 
-                    System.out.println("Goodbye");
+                    System.out.println(
+                            "Goodbye"
+                    );
 
                     return;
 
 
 
+
+
                 default:
 
-                    System.out.println("Wrong choice");
+                    System.out.println(
+                            "Wrong choice"
+                    );
 
             }
 
@@ -105,34 +142,53 @@ public class MainView {
 
 
 
+
+
+
     private void register() {
 
 
-        System.out.print("Username: ");
+        System.out.print(
+                "Username: "
+        );
+
 
         String username =
                 scanner.nextLine();
 
 
 
-        System.out.print("Email: ");
+
+        System.out.print(
+                "Email: "
+        );
+
 
         String email =
                 scanner.nextLine();
 
 
 
-        System.out.print("Phone: ");
+
+        System.out.print(
+                "Phone: "
+        );
+
 
         String phone =
                 scanner.nextLine();
 
 
 
-        System.out.print("Password: ");
+
+        System.out.print(
+                "Password: "
+        );
+
 
         String password =
                 scanner.nextLine();
+
 
 
 
@@ -143,6 +199,7 @@ public class MainView {
                 phone,
                 password
         );
+
 
 
 
@@ -158,20 +215,32 @@ public class MainView {
 
 
 
+
+
     private void login() {
 
 
-        System.out.print("Username: ");
+        System.out.print(
+                "Username: "
+        );
+
 
         String username =
                 scanner.nextLine();
 
 
 
-        System.out.print("Password: ");
+
+
+        System.out.print(
+                "Password: "
+        );
+
 
         String password =
                 scanner.nextLine();
+
+
 
 
 
@@ -186,7 +255,9 @@ public class MainView {
 
 
 
+
         if(result) {
+
 
 
             System.out.println(
@@ -195,27 +266,70 @@ public class MainView {
 
 
 
-            Buyer buyer =
-                    (Buyer) authController.getCurrentUser();
+
+            User user =
+                    authController.getCurrentUser();
 
 
 
 
-            BuyerView buyerView =
-                    new BuyerView(
-                            buyer,
-                            new ProductController(),
-                            new CartController()
-                    );
 
 
 
-            buyerView.showMenu();
+
+            if(user instanceof Buyer) {
+
+
+
+                BuyerView buyerView =
+                        new BuyerView(
+                                (Buyer) user,
+
+                                productController,
+
+                                new CartController()
+                        );
+
+
+
+                buyerView.showMenu();
+
+            }
+
+
+
+
+
+
+
+
+
+            else if(user instanceof Admin) {
+
+
+
+
+                AdminView adminView =
+                        new AdminView(
+
+                                new AdminController(
+                                        productController
+                                )
+
+                        );
+
+
+
+                adminView.showMenu();
+
+            }
 
 
 
         }
+
         else {
+
 
 
             System.out.println(
@@ -224,6 +338,9 @@ public class MainView {
 
         }
 
+
     }
+
+
 
 }
