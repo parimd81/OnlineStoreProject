@@ -2,6 +2,9 @@ package com.online.store.view;
 
 
 import com.online.store.controller.AuthController;
+import com.online.store.controller.CartController;
+import com.online.store.controller.ProductController;
+import com.online.store.model.users.Buyer;
 
 
 import java.util.Scanner;
@@ -25,8 +28,7 @@ public class MainView {
         scanner = new Scanner(System.in);
 
 
-        authController =
-                new AuthController();
+        authController = new AuthController();
 
     }
 
@@ -50,6 +52,7 @@ public class MainView {
 
 
             System.out.print("Choice: ");
+
 
 
             int choice =
@@ -81,6 +84,8 @@ public class MainView {
 
 
                 case 3:
+
+                    System.out.println("Goodbye");
 
                     return;
 
@@ -151,6 +156,8 @@ public class MainView {
 
 
 
+
+
     private void login() {
 
 
@@ -177,14 +184,45 @@ public class MainView {
 
 
 
-        if(result)
-
-            System.out.println("Login successful");
 
 
-        else
+        if(result) {
 
-            System.out.println("Login failed");
+
+            System.out.println(
+                    "Login successful"
+            );
+
+
+
+            Buyer buyer =
+                    (Buyer) authController.getCurrentUser();
+
+
+
+
+            BuyerView buyerView =
+                    new BuyerView(
+                            buyer,
+                            new ProductController(),
+                            new CartController()
+                    );
+
+
+
+            buyerView.showMenu();
+
+
+
+        }
+        else {
+
+
+            System.out.println(
+                    "Login failed"
+            );
+
+        }
 
     }
 

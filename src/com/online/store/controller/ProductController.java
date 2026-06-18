@@ -2,6 +2,9 @@ package com.online.store.controller;
 
 
 import com.online.store.model.products.Product;
+import com.online.store.model.products.digital.FlashMemory;
+import com.online.store.model.products.digital.SSD;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +20,22 @@ public class ProductController {
 
     public ProductController() {
 
+
         products = new ArrayList<>();
+
+
+        loadSampleProducts();
 
     }
 
 
 
-    // اضافه کردن محصول
+
+
+    // اضافه کردن محصول جدید
 
     public void addProduct(Product product) {
+
 
         products.add(product);
 
@@ -33,9 +43,12 @@ public class ProductController {
 
 
 
+
+
     // حذف محصول
 
     public boolean removeProduct(Product product) {
+
 
         return products.remove(product);
 
@@ -43,9 +56,12 @@ public class ProductController {
 
 
 
-    // دریافت تمام محصولات
+
+
+    // گرفتن همه محصولات
 
     public List<Product> getAllProducts() {
+
 
         return products;
 
@@ -53,7 +69,9 @@ public class ProductController {
 
 
 
-    // پیدا کردن محصول با شناسه
+
+
+    // پیدا کردن محصول با ID
 
     public Product findById(String id) {
 
@@ -63,13 +81,16 @@ public class ProductController {
 
             if(product.getId().equals(id)) {
 
+
                 return product;
 
             }
+
         }
 
 
         return null;
+
     }
 
 
@@ -81,7 +102,8 @@ public class ProductController {
     public List<Product> searchByName(String keyword) {
 
 
-        List<Product> result = new ArrayList<>();
+        List<Product> result =
+                new ArrayList<>();
 
 
         for(Product product : products) {
@@ -95,6 +117,7 @@ public class ProductController {
                 result.add(product);
 
             }
+
         }
 
 
@@ -106,13 +129,14 @@ public class ProductController {
 
 
 
-    // فیلتر بر اساس قیمت
+    // فیلتر قیمت
 
     public List<Product> filterByPrice(double min,
                                        double max) {
 
 
-        List<Product> result = new ArrayList<>();
+        List<Product> result =
+                new ArrayList<>();
 
 
         for(Product product : products) {
@@ -138,12 +162,13 @@ public class ProductController {
 
 
 
-    // فیلتر محصولات موجود
+    // نمایش کالاهای موجود
 
     public List<Product> filterAvailableProducts() {
 
 
-        List<Product> result = new ArrayList<>();
+        List<Product> result =
+                new ArrayList<>();
 
 
         for(Product product : products) {
@@ -162,5 +187,46 @@ public class ProductController {
         return result;
 
     }
+
+
+
+
+
+    // اضافه کردن محصولات اولیه برای تست
+
+    private void loadSampleProducts() {
+
+
+
+        Product ssd =
+                new SSD(
+                        "1",
+                        "Samsung SSD",
+                        5000,
+                        10,
+                        "Samsung",
+                        512
+                );
+
+
+
+        Product flash =
+                new FlashMemory(
+                        "2",
+                        "Kingston Flash Memory",
+                        1000,
+                        20,
+                        "Kingston",
+                        3
+                );
+
+
+
+        products.add(ssd);
+
+        products.add(flash);
+
+    }
+
 
 }
