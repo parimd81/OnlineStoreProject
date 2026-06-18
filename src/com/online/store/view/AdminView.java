@@ -2,6 +2,8 @@ package com.online.store.view;
 
 
 import com.online.store.controller.AdminController;
+
+
 import com.online.store.model.products.Product;
 
 
@@ -13,10 +15,13 @@ import java.util.Scanner;
 public class AdminView {
 
 
+
     private Scanner scanner;
 
 
     private AdminController adminController;
+
+
 
 
 
@@ -34,6 +39,8 @@ public class AdminView {
 
 
 
+
+
     public void showMenu() {
 
 
@@ -46,13 +53,17 @@ public class AdminView {
             System.out.println("1. Show Products");
 
 
-            System.out.println("2. Remove Product");
+            System.out.println("2. Add Product");
 
 
-            System.out.println("3. Logout");
+            System.out.println("3. Remove Product");
+
+
+            System.out.println("4. Logout");
 
 
             System.out.print("Choice: ");
+
 
 
 
@@ -61,6 +72,8 @@ public class AdminView {
 
 
             scanner.nextLine();
+
+
 
 
 
@@ -78,7 +91,18 @@ public class AdminView {
 
 
 
+
                 case 2:
+
+                    addProduct();
+
+                    break;
+
+
+
+
+
+                case 3:
 
                     removeProduct();
 
@@ -87,9 +111,11 @@ public class AdminView {
 
 
 
-                case 3:
+
+                case 4:
 
                     return;
+
 
 
 
@@ -110,6 +136,10 @@ public class AdminView {
 
 
 
+
+
+
+
     private void showProducts() {
 
 
@@ -118,11 +148,12 @@ public class AdminView {
 
 
 
+
         if(products.isEmpty()) {
 
 
             System.out.println(
-                    "No products"
+                    "No products available"
             );
 
 
@@ -141,21 +172,23 @@ public class AdminView {
 
         }
 
+
     }
 
 
 
 
 
-    private void removeProduct() {
 
 
-        showProducts();
+
+
+    private void addProduct() {
 
 
 
         System.out.print(
-                "Enter product ID: "
+                "Product ID: "
         );
 
 
@@ -165,18 +198,107 @@ public class AdminView {
 
 
 
+
+        System.out.print(
+                "Product Name: "
+        );
+
+
+        String name =
+                scanner.nextLine();
+
+
+
+
+
+        System.out.print(
+                "Price: "
+        );
+
+
+        double price =
+                scanner.nextDouble();
+
+
+
+
+
+        System.out.print(
+                "Stock: "
+        );
+
+
+        int stock =
+                scanner.nextInt();
+
+
+        scanner.nextLine();
+
+
+
+
+
         Product product =
-                adminController
-                        .getProducts()
-                        .stream()
-                        .filter(p -> p.getId().equals(id))
-                        .findFirst()
-                        .orElse(null);
+                new Product(
+                        id,
+                        name,
+                        price,
+                        stock
+                ) {};
+
+
+
+
+
+        adminController.addProduct(product);
+
+
+
+        System.out.println(
+                "Product added successfully"
+        );
+
+    }
+
+
+
+
+
+
+
+
+
+    private void removeProduct() {
+
+
+
+        showProducts();
+
+
+
+
+        System.out.print(
+                "Enter product ID: "
+        );
+
+
+
+        String id =
+                scanner.nextLine();
+
+
+
+
+
+        Product product =
+                adminController.findProductById(id);
+
 
 
 
 
         if(product == null) {
+
 
 
             System.out.println(
@@ -192,15 +314,17 @@ public class AdminView {
 
 
 
+
         adminController.removeProduct(product);
 
 
 
         System.out.println(
-                "Product removed"
+                "Product removed successfully"
         );
 
     }
+
 
 
 }

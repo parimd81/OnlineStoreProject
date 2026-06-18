@@ -3,6 +3,7 @@ package com.online.store.controller;
 
 import com.online.store.model.products.Product;
 
+
 import java.util.List;
 
 
@@ -25,6 +26,8 @@ public class AdminController {
 
 
 
+
+
     // اضافه کردن محصول
 
     public void addProduct(Product product) {
@@ -33,6 +36,8 @@ public class AdminController {
         productController.addProduct(product);
 
     }
+
+
 
 
 
@@ -51,12 +56,29 @@ public class AdminController {
 
 
 
-    // نمایش محصولات
+
+
+    // گرفتن همه محصولات
 
     public List<Product> getProducts() {
 
 
         return productController.getAllProducts();
+
+    }
+
+
+
+
+
+
+
+    // پیدا کردن محصول با ID
+
+    public Product findProductById(String id) {
+
+
+        return productController.findById(id);
 
     }
 
