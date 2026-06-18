@@ -2,7 +2,10 @@ package com.online.store.view;
 
 
 import com.online.store.controller.CartController;
+import com.online.store.controller.InvoiceController;
 import com.online.store.controller.ProductController;
+
+import com.online.store.model.invoices.Invoice;
 import com.online.store.model.products.Product;
 import com.online.store.model.users.Buyer;
 
@@ -17,11 +20,17 @@ public class BuyerView {
 
     private Scanner scanner;
 
+
     private Buyer buyer;
+
 
     private ProductController productController;
 
+
     private CartController cartController;
+
+
+    private InvoiceController invoiceController;
 
 
 
@@ -36,9 +45,15 @@ public class BuyerView {
 
         this.buyer = buyer;
 
+
         this.productController = productController;
 
+
         this.cartController = cartController;
+
+
+        this.invoiceController =
+                new InvoiceController();
 
     }
 
@@ -57,13 +72,20 @@ public class BuyerView {
 
             System.out.println("1. Show Products");
 
+
             System.out.println("2. Search Product");
+
 
             System.out.println("3. Add Product To Cart");
 
+
             System.out.println("4. Show Cart");
 
-            System.out.println("5. Logout");
+
+            System.out.println("5. Checkout");
+
+
+            System.out.println("6. Logout");
 
 
             System.out.print("Choice: ");
@@ -80,6 +102,7 @@ public class BuyerView {
 
 
             switch(choice) {
+
 
 
                 case 1:
@@ -116,13 +139,23 @@ public class BuyerView {
 
                 case 5:
 
+                    checkout();
+
+                    break;
+
+
+
+                case 6:
+
                     return;
 
 
 
                 default:
 
-                    System.out.println("Wrong choice");
+                    System.out.println(
+                            "Wrong choice"
+                    );
 
             }
 
@@ -134,7 +167,7 @@ public class BuyerView {
 
 
 
-    // نمایش محصولات
+
 
     private void showProducts() {
 
@@ -172,7 +205,7 @@ public class BuyerView {
 
 
 
-    // جستجوی محصول
+
 
     private void searchProduct() {
 
@@ -184,6 +217,7 @@ public class BuyerView {
 
         String name =
                 scanner.nextLine();
+
 
 
 
@@ -221,10 +255,9 @@ public class BuyerView {
 
 
 
-    // اضافه کردن محصول به سبد
+
 
     private void addToCart() {
-
 
 
         showProducts();
@@ -269,12 +302,13 @@ public class BuyerView {
         );
 
 
+
         int quantity =
                 scanner.nextInt();
 
 
-        scanner.nextLine();
 
+        scanner.nextLine();
 
 
 
@@ -298,13 +332,13 @@ public class BuyerView {
 
 
 
-    // نمایش سبد خرید
+
 
     private void showCart() {
 
 
         System.out.println(
-                "===== Your Cart ====="
+                "\n===== Your Cart ====="
         );
 
 
@@ -320,6 +354,47 @@ public class BuyerView {
                         +
                         cartController.calculateTotal(buyer)
         );
+
+    }
+
+
+
+
+
+
+
+    private void checkout() {
+
+
+        try {
+
+
+
+            Invoice invoice =
+                    invoiceController.checkout(buyer);
+
+
+
+
+            System.out.println(
+                    "Purchase completed successfully"
+            );
+
+
+
+            System.out.println(invoice);
+
+
+
+        }
+        catch(RuntimeException e) {
+
+
+            System.out.println(
+                    e.getMessage()
+            );
+
+        }
 
     }
 
