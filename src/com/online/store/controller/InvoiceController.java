@@ -1,6 +1,7 @@
 package com.online.store.controller;
 
 
+import com.online.store.model.cart.CartItem;
 import com.online.store.model.invoices.Invoice;
 import com.online.store.model.users.Buyer;
 
@@ -13,11 +14,15 @@ import java.util.List;
 public class InvoiceController {
 
 
+
     private List<Invoice> invoices;
 
 
 
+
+
     public InvoiceController() {
+
 
         invoices = new ArrayList<>();
 
@@ -26,12 +31,15 @@ public class InvoiceController {
 
 
 
+
+
+
+
     public Invoice checkout(Buyer buyer) {
 
 
-        // بررسی خالی نبودن سبد
 
-        if (buyer.getCart()
+        if(buyer.getCart()
                 .getItems()
                 .isEmpty()) {
 
@@ -39,7 +47,11 @@ public class InvoiceController {
             throw new RuntimeException(
                     "Cart is empty"
             );
+
         }
+
+
+
 
 
 
@@ -49,34 +61,75 @@ public class InvoiceController {
 
 
 
-        // بررسی موجودی کیف پول
 
-        if (buyer.getWalletBalance() < total) {
+
+
+
+
+        if(buyer.getWalletBalance() < total) {
 
 
             throw new RuntimeException(
                     "Insufficient balance"
             );
+
         }
 
 
 
-        // کم کردن پول از کیف پول
+
+
+
+
+        // کم کردن موجودی محصولات
+
+        for(CartItem item :
+                buyer.getCart().getItems()) {
+
+
+
+            item.getProduct()
+                    .setStock(
+                            item.getProduct()
+                                    .getStock()
+                                    -
+                                    item.getQuantity()
+                    );
+
+        }
+
+
+
+
+
+
+
+
+        // کم کردن پول
 
         buyer.setWalletBalance(
-                buyer.getWalletBalance() - total
+                buyer.getWalletBalance()
+                        -
+                        total
         );
 
 
 
-        // ساخت فاکتور
+
+
+
+
 
         Invoice invoice =
                 new Invoice(
-                        invoices.size() + 1,
+                        invoices.size()+1,
                         buyer,
-                        buyer.getCart().getItems()
+                        buyer.getCart()
+                                .getItems()
                 );
+
+
+
 
 
 
@@ -84,14 +137,27 @@ public class InvoiceController {
 
 
 
-        // خالی کردن سبد خرید
 
-        buyer.getCart().clear();
+
+
+
+        // خالی کردن سبد
+
+        buyer.getCart()
+                .clear();
+
+
+
+
 
 
 
         return invoice;
+
     }
+
+
+
 
 
 
@@ -99,8 +165,11 @@ public class InvoiceController {
 
     public List<Invoice> getAllInvoices() {
 
+
         return invoices;
 
     }
+
+
 
 }

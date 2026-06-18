@@ -17,6 +17,11 @@ public class AuthController {
     private List<User> users;
 
 
+    private User currentUser;
+
+
+
+
 
     public AuthController() {
 
@@ -24,7 +29,7 @@ public class AuthController {
         users = new ArrayList<>();
 
 
-        // اضافه کردن Admin پیش فرض
+        // اضافه کردن ادمین پیش فرض
 
         users.add(
                 Admin.getInstance()
@@ -36,20 +41,20 @@ public class AuthController {
 
 
 
-
     public void register(String username,
                          String email,
-                         String phone,
+                         String phoneNumber,
                          String password) {
+
 
 
         Buyer buyer =
                 new Buyer(
                         username,
                         email,
-                        phone,
+                        phoneNumber,
                         password,
-                        0
+                        10000
                 );
 
 
@@ -67,21 +72,21 @@ public class AuthController {
                          String password) {
 
 
-        for(User user : users) {
+        User user =
+                getUser(username, password);
 
 
-            if(user.getUsername()
-                    .equals(username)
-                    &&
-                    user.getPassword()
-                            .equals(password)) {
+
+        if(user != null) {
 
 
-                return true;
+            currentUser = user;
 
-            }
+
+            return true;
 
         }
+
 
 
         return false;
@@ -98,7 +103,9 @@ public class AuthController {
                         String password) {
 
 
+
         for(User user : users) {
+
 
 
             if(user.getUsername()
@@ -108,6 +115,7 @@ public class AuthController {
                             .equals(password)) {
 
 
+
                 return user;
 
             }
@@ -115,8 +123,24 @@ public class AuthController {
         }
 
 
+
         return null;
 
     }
+
+
+
+
+
+
+
+    public User getCurrentUser() {
+
+
+        return currentUser;
+
+    }
+
+
 
 }

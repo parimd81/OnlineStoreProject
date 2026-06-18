@@ -25,10 +25,6 @@ public class MainView {
     private AuthController authController;
 
 
-    // کنترلر مشترک محصولات برای کل برنامه
-    private ProductController productController;
-
-
 
 
 
@@ -38,15 +34,8 @@ public class MainView {
         scanner = new Scanner(System.in);
 
 
-
         authController =
                 new AuthController();
-
-
-
-        // فقط یک نمونه از ProductController
-        productController =
-                new ProductController();
 
     }
 
@@ -59,7 +48,9 @@ public class MainView {
     public void showMenu() {
 
 
+
         while(true) {
+
 
 
             System.out.println("\n===== Online Store =====");
@@ -90,6 +81,7 @@ public class MainView {
 
 
 
+
             switch(choice) {
 
 
@@ -102,8 +94,6 @@ public class MainView {
 
 
 
-
-
                 case 2:
 
                     login();
@@ -112,17 +102,9 @@ public class MainView {
 
 
 
-
-
                 case 3:
 
-                    System.out.println(
-                            "Goodbye"
-                    );
-
                     return;
-
-
 
 
 
@@ -145,13 +127,12 @@ public class MainView {
 
 
 
+
     private void register() {
 
 
-        System.out.print(
-                "Username: "
-        );
 
+        System.out.print("Username: ");
 
         String username =
                 scanner.nextLine();
@@ -159,10 +140,7 @@ public class MainView {
 
 
 
-        System.out.print(
-                "Email: "
-        );
-
+        System.out.print("Email: ");
 
         String email =
                 scanner.nextLine();
@@ -170,10 +148,7 @@ public class MainView {
 
 
 
-        System.out.print(
-                "Phone: "
-        );
-
+        System.out.print("Phone: ");
 
         String phone =
                 scanner.nextLine();
@@ -181,13 +156,11 @@ public class MainView {
 
 
 
-        System.out.print(
-                "Password: "
-        );
-
+        System.out.print("Password: ");
 
         String password =
                 scanner.nextLine();
+
 
 
 
@@ -220,10 +193,8 @@ public class MainView {
     private void login() {
 
 
-        System.out.print(
-                "Username: "
-        );
 
+        System.out.print("Username: ");
 
         String username =
                 scanner.nextLine();
@@ -232,10 +203,7 @@ public class MainView {
 
 
 
-        System.out.print(
-                "Password: "
-        );
-
+        System.out.print("Password: ");
 
         String password =
                 scanner.nextLine();
@@ -245,8 +213,9 @@ public class MainView {
 
 
 
-        boolean result =
-                authController.login(
+
+        User user =
+                authController.getUser(
                         username,
                         password
                 );
@@ -256,79 +225,7 @@ public class MainView {
 
 
 
-        if(result) {
-
-
-
-            System.out.println(
-                    "Login successful"
-            );
-
-
-
-
-            User user =
-                    authController.getCurrentUser();
-
-
-
-
-
-
-
-
-            if(user instanceof Buyer) {
-
-
-
-                BuyerView buyerView =
-                        new BuyerView(
-                                (Buyer) user,
-
-                                productController,
-
-                                new CartController()
-                        );
-
-
-
-                buyerView.showMenu();
-
-            }
-
-
-
-
-
-
-
-
-
-            else if(user instanceof Admin) {
-
-
-
-
-                AdminView adminView =
-                        new AdminView(
-
-                                new AdminController(
-                                        productController
-                                )
-
-                        );
-
-
-
-                adminView.showMenu();
-
-            }
-
-
-
-        }
-
-        else {
+        if(user == null) {
 
 
 
@@ -336,11 +233,81 @@ public class MainView {
                     "Login failed"
             );
 
+
+            return;
+
+        }
+
+
+
+
+
+
+
+        System.out.println(
+                "Login successful"
+        );
+
+
+
+
+
+
+
+        if(user instanceof Admin) {
+
+
+
+            System.out.println(
+                    "Welcome Admin"
+            );
+
+
+
+            AdminView adminView =
+                    new AdminView(
+                            new AdminController()
+                    );
+
+
+
+            adminView.showMenu();
+
+        }
+
+
+
+
+
+
+
+
+        else if(user instanceof Buyer) {
+
+
+
+            System.out.println(
+                    "Welcome Buyer"
+            );
+
+
+
+
+            BuyerView buyerView =
+                    new BuyerView(
+                            (Buyer) user,
+                            new ProductController(),
+                            new CartController()
+                    );
+
+
+
+            buyerView.showMenu();
+
         }
 
 
     }
-
 
 
 }

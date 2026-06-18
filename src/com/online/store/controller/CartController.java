@@ -7,43 +7,97 @@ import com.online.store.model.products.Product;
 import com.online.store.model.users.Buyer;
 
 
+
 public class CartController {
 
 
-    // اضافه کردن کالا به سبد خرید
+
+    // اضافه کردن محصول به سبد خرید
 
     public void addToCart(Buyer buyer,
                           Product product,
                           int quantity) {
 
 
-        Cart cart = buyer.getCart();
+
+        if(quantity <= 0) {
+
+
+            throw new RuntimeException(
+                    "Invalid quantity"
+            );
+
+        }
+
+
+
+
+
+        // بررسی موجودی انبار
+
+        if(product.getStock() < quantity) {
+
+
+            throw new RuntimeException(
+                    "Not enough stock"
+            );
+
+        }
+
+
+
+
+
+        Cart cart =
+                buyer.getCart();
+
+
 
 
         CartItem item =
-                new CartItem(product, quantity);
+                new CartItem(
+                        product,
+                        quantity
+                );
+
+
 
 
         cart.addItem(item);
+
     }
 
 
 
-    // حذف کالا از سبد
+
+
+
+
+
+    // حذف از سبد
 
     public void removeFromCart(Buyer buyer,
                                CartItem item) {
 
 
-        Cart cart = buyer.getCart();
+
+        Cart cart =
+                buyer.getCart();
+
 
 
         cart.removeItem(item);
+
     }
 
 
 
-    // نمایش سبد خرید
+
+
+
+
+
+    // نمایش سبد
 
     public Cart viewCart(Buyer buyer) {
 
@@ -51,6 +105,11 @@ public class CartController {
         return buyer.getCart();
 
     }
+
+
+
+
+
 
 
 
@@ -63,5 +122,7 @@ public class CartController {
                 .getTotalPrice();
 
     }
+
+
 
 }
