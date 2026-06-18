@@ -1,18 +1,53 @@
 package com.online.store.model.products.vehicle;
 
-public class Car extends Vehicle {
-    private int engineCapacity;
-    private boolean isAutomatic;
 
-    public Car(String id, String name, double price, int stock, String manufacturer, int engineCapacity, boolean isAutomatic) {
+public class Car extends Vehicle {
+
+    private int engineCapacity;
+    private boolean automatic;
+
+
+    public Car(String id,
+               String name,
+               double price,
+               int stock,
+               String manufacturer,
+               int engineCapacity,
+               boolean automatic) {
+
+
         super(id, name, price, stock, manufacturer);
+
         this.engineCapacity = engineCapacity;
-        this.isAutomatic = isAutomatic;
+        this.automatic = automatic;
     }
 
-    public int getEngineCapacity() { return engineCapacity; }
-    public void setEngineCapacity(int engineCapacity) { this.engineCapacity = engineCapacity; }
 
-    public boolean isAutomatic() { return isAutomatic; }
-    public void setAutomatic(boolean automatic) { isAutomatic = automatic; }
+    public int getEngineCapacity() {
+        return engineCapacity;
+    }
+
+
+    public void setEngineCapacity(int engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
+
+
+    public boolean isAutomatic() {
+        return automatic;
+    }
+
+
+    public void setAutomatic(boolean automatic) {
+        this.automatic = automatic;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "engineCapacity=" + engineCapacity +
+                ", automatic=" + automatic +
+                '}';
+    }
 }

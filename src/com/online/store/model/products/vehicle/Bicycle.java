@@ -1,13 +1,40 @@
 package com.online.store.model.products.vehicle;
 
-public class Bicycle extends Vehicle {
-    private String type;
 
-    public Bicycle(String id, String name, double price, int stock, String manufacturer, String type) {
+public class Bicycle extends Vehicle {
+
+
+    private String bicycleType;
+
+
+    public Bicycle(String id,
+                   String name,
+                   double price,
+                   int stock,
+                   String manufacturer,
+                   String bicycleType) {
+
+
         super(id, name, price, stock, manufacturer);
-        this.type = type;
+
+        this.bicycleType = bicycleType;
     }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+
+    public String getBicycleType() {
+        return bicycleType;
+    }
+
+
+    public void setBicycleType(String bicycleType) {
+        this.bicycleType = bicycleType;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Bicycle{" +
+                "bicycleType='" + bicycleType + '\'' +
+                '}';
+    }
 }
