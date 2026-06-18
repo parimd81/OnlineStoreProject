@@ -15,7 +15,6 @@ public class Car extends Vehicle {
                int engineCapacity,
                boolean automatic) {
 
-
         super(id, name, price, stock, manufacturer);
 
         this.engineCapacity = engineCapacity;
@@ -45,9 +44,16 @@ public class Car extends Vehicle {
 
     @Override
     public String toString() {
+
         return "Car{" +
-                "engineCapacity=" + engineCapacity +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", price=" + getPrice() +
+                ", stock=" + getStock() +
+                ", manufacturer='" + getManufacturer() + '\'' +
+                ", engineCapacity=" + engineCapacity +
                 ", automatic=" + automatic +
                 '}';
     }
+
 }
