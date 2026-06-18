@@ -3,8 +3,9 @@ package com.online.store.view;
 
 import com.online.store.controller.AdminController;
 
-
 import com.online.store.model.products.Product;
+import com.online.store.model.products.digital.FlashMemory;
+import com.online.store.model.products.digital.SSD;
 
 
 import java.util.List;
@@ -15,13 +16,10 @@ import java.util.Scanner;
 public class AdminView {
 
 
-
     private Scanner scanner;
 
 
     private AdminController adminController;
-
-
 
 
 
@@ -77,7 +75,6 @@ public class AdminView {
 
 
 
-
             switch(choice) {
 
 
@@ -90,15 +87,11 @@ public class AdminView {
 
 
 
-
-
                 case 2:
 
                     addProduct();
 
                     break;
-
-
 
 
 
@@ -110,13 +103,9 @@ public class AdminView {
 
 
 
-
-
                 case 4:
 
                     return;
-
-
 
 
 
@@ -172,7 +161,6 @@ public class AdminView {
 
         }
 
-
     }
 
 
@@ -186,9 +174,32 @@ public class AdminView {
     private void addProduct() {
 
 
+        System.out.println("\n===== Add Product =====");
+
+
+        System.out.println("1. SSD");
+
+
+        System.out.println("2. Flash Memory");
+
+
+        System.out.print("Choice: ");
+
+
+
+        int type =
+                scanner.nextInt();
+
+
+        scanner.nextLine();
+
+
+
+
+
 
         System.out.print(
-                "Product ID: "
+                "ID: "
         );
 
 
@@ -200,7 +211,7 @@ public class AdminView {
 
 
         System.out.print(
-                "Product Name: "
+                "Name: "
         );
 
 
@@ -238,13 +249,126 @@ public class AdminView {
 
 
 
-        Product product =
-                new Product(
-                        id,
-                        name,
-                        price,
-                        stock
-                ) {};
+        Product product = null;
+
+
+
+
+
+
+        switch(type) {
+
+
+
+            case 1:
+
+
+
+                System.out.print(
+                        "Brand: "
+                );
+
+
+                String brand =
+                        scanner.nextLine();
+
+
+
+
+                System.out.print(
+                        "Capacity GB: "
+                );
+
+
+                int capacity =
+                        scanner.nextInt();
+
+
+                scanner.nextLine();
+
+
+
+
+
+                product =
+                        new SSD(
+                                id,
+                                name,
+                                price,
+                                stock,
+                                brand,
+                                capacity
+                        );
+
+
+                break;
+
+
+
+
+
+
+
+            case 2:
+
+
+
+                System.out.print(
+                        "Brand: "
+                );
+
+
+                String flashBrand =
+                        scanner.nextLine();
+
+
+
+
+                System.out.print(
+                        "USB Version: "
+                );
+
+
+                int usb =
+                        scanner.nextInt();
+
+
+                scanner.nextLine();
+
+
+
+
+
+                product =
+                        new FlashMemory(
+                                id,
+                                name,
+                                price,
+                                stock,
+                                flashBrand,
+                                usb
+                        );
+
+
+                break;
+
+
+
+
+
+
+
+            default:
+
+                System.out.println(
+                        "Wrong type"
+                );
+
+                return;
+
+        }
+
+
 
 
 
@@ -271,9 +395,7 @@ public class AdminView {
     private void removeProduct() {
 
 
-
         showProducts();
-
 
 
 
@@ -282,10 +404,8 @@ public class AdminView {
         );
 
 
-
         String id =
                 scanner.nextLine();
-
 
 
 
@@ -296,9 +416,7 @@ public class AdminView {
 
 
 
-
         if(product == null) {
-
 
 
             System.out.println(
@@ -314,7 +432,6 @@ public class AdminView {
 
 
 
-
         adminController.removeProduct(product);
 
 
@@ -324,7 +441,6 @@ public class AdminView {
         );
 
     }
-
 
 
 }
