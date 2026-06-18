@@ -1,13 +1,37 @@
 package com.online.store.model.products.stationery;
 
-public abstract class Stationery extends Product {
-    private String countryOfOrigin;
+import com.online.store.model.products.Product;
 
-    public Stationery(String id, String name, double price, int stock, String countryOfOrigin) {
-        super(id, name, price, stock, countryOfOrigin);
-        this.countryOfOrigin = countryOfOrigin;
+public abstract class Stationery extends Product {
+
+    private String brand;
+
+
+    public Stationery(String id,
+                      String name,
+                      double price,
+                      int stock,
+                      String brand) {
+
+        super(id, name, price, stock);
+        this.brand = brand;
     }
 
-    public String getCountryOfOrigin() { return countryOfOrigin; }
-    public void setCountryOfOrigin(String countryOfOrigin) { this.countryOfOrigin = countryOfOrigin; }
+
+    public String getBrand() {
+        return brand;
+    }
+
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Stationery{" +
+                "brand='" + brand + '\'' +
+                '}';
+    }
 }
