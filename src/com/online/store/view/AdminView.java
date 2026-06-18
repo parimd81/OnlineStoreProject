@@ -3,11 +3,21 @@ package com.online.store.view;
 
 import com.online.store.controller.AdminController;
 
+
 import com.online.store.model.products.Product;
+
 import com.online.store.model.products.digital.FlashMemory;
 import com.online.store.model.products.digital.SSD;
 
+import com.online.store.model.products.vehicle.Car;
+import com.online.store.model.products.vehicle.Bicycle;
 
+import com.online.store.model.products.stationery.Pencil;
+
+import com.online.store.model.products.food.FoodProduct;
+
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,10 +26,13 @@ import java.util.Scanner;
 public class AdminView {
 
 
+
     private Scanner scanner;
 
 
     private AdminController adminController;
+
+
 
 
 
@@ -76,7 +89,6 @@ public class AdminView {
 
 
             switch(choice) {
-
 
 
                 case 1:
@@ -183,7 +195,20 @@ public class AdminView {
         System.out.println("2. Flash Memory");
 
 
+        System.out.println("3. Car");
+
+
+        System.out.println("4. Bicycle");
+
+
+        System.out.println("5. Pencil");
+
+
+        System.out.println("6. Food Product");
+
+
         System.out.print("Choice: ");
+
 
 
 
@@ -198,10 +223,7 @@ public class AdminView {
 
 
 
-        System.out.print(
-                "ID: "
-        );
-
+        System.out.print("ID: ");
 
         String id =
                 scanner.nextLine();
@@ -210,10 +232,7 @@ public class AdminView {
 
 
 
-        System.out.print(
-                "Name: "
-        );
-
+        System.out.print("Name: ");
 
         String name =
                 scanner.nextLine();
@@ -222,10 +241,7 @@ public class AdminView {
 
 
 
-        System.out.print(
-                "Price: "
-        );
-
+        System.out.print("Price: ");
 
         double price =
                 scanner.nextDouble();
@@ -234,10 +250,7 @@ public class AdminView {
 
 
 
-        System.out.print(
-                "Stock: "
-        );
-
+        System.out.print("Stock: ");
 
         int stock =
                 scanner.nextInt();
@@ -263,11 +276,7 @@ public class AdminView {
             case 1:
 
 
-
-                System.out.print(
-                        "Brand: "
-                );
-
+                System.out.print("Brand: ");
 
                 String brand =
                         scanner.nextLine();
@@ -275,17 +284,13 @@ public class AdminView {
 
 
 
-                System.out.print(
-                        "Capacity GB: "
-                );
-
+                System.out.print("Capacity GB: ");
 
                 int capacity =
                         scanner.nextInt();
 
 
                 scanner.nextLine();
-
 
 
 
@@ -312,11 +317,7 @@ public class AdminView {
             case 2:
 
 
-
-                System.out.print(
-                        "Brand: "
-                );
-
+                System.out.print("Brand: ");
 
                 String flashBrand =
                         scanner.nextLine();
@@ -324,17 +325,13 @@ public class AdminView {
 
 
 
-                System.out.print(
-                        "USB Version: "
-                );
+                System.out.print("USB Version: ");
 
-
-                int usb =
+                int usbVersion =
                         scanner.nextInt();
 
 
                 scanner.nextLine();
-
 
 
 
@@ -346,7 +343,7 @@ public class AdminView {
                                 price,
                                 stock,
                                 flashBrand,
-                                usb
+                                usbVersion
                         );
 
 
@@ -358,16 +355,242 @@ public class AdminView {
 
 
 
+
+            case 3:
+
+
+                System.out.print("Manufacturer: ");
+
+                String manufacturer =
+                        scanner.nextLine();
+
+
+
+
+                System.out.print("Engine Capacity: ");
+
+                int engineCapacity =
+                        scanner.nextInt();
+
+
+
+
+                System.out.print("Automatic (true/false): ");
+
+                boolean automatic =
+                        scanner.nextBoolean();
+
+
+                scanner.nextLine();
+
+
+
+
+                product =
+                        new Car(
+                                id,
+                                name,
+                                price,
+                                stock,
+                                manufacturer,
+                                engineCapacity,
+                                automatic
+                        );
+
+
+                break;
+
+
+
+
+
+
+
+
+            case 4:
+
+
+                System.out.print("Manufacturer: ");
+
+                String bikeManufacturer =
+                        scanner.nextLine();
+
+
+
+
+                System.out.print("Bicycle Type: ");
+
+                String bicycleType =
+                        scanner.nextLine();
+
+
+
+
+                product =
+                        new Bicycle(
+                                id,
+                                name,
+                                price,
+                                stock,
+                                bikeManufacturer,
+                                bicycleType
+                        );
+
+
+                break;
+
+
+
+
+
+
+
+
+            case 5:
+
+
+                System.out.print("Brand: ");
+
+                String pencilBrand =
+                        scanner.nextLine();
+
+
+
+
+                System.out.print("Hardness: ");
+
+                String hardness =
+                        scanner.nextLine();
+
+
+
+
+                product =
+                        new Pencil(
+                                id,
+                                name,
+                                price,
+                                stock,
+                                pencilBrand,
+                                hardness
+                        );
+
+
+                break;
+
+
+
+
+
+
+
+
+            case 6:
+
+
+                System.out.println("Production Date");
+
+
+                System.out.print("Year: ");
+
+                int py =
+                        scanner.nextInt();
+
+
+                System.out.print("Month: ");
+
+                int pm =
+                        scanner.nextInt();
+
+
+                System.out.print("Day: ");
+
+                int pd =
+                        scanner.nextInt();
+
+
+
+                LocalDate productionDate =
+                        LocalDate.of(
+                                py,
+                                pm,
+                                pd
+                        );
+
+
+
+
+
+
+                System.out.println("Expiration Date");
+
+
+
+                System.out.print("Year: ");
+
+                int ey =
+                        scanner.nextInt();
+
+
+                System.out.print("Month: ");
+
+                int em =
+                        scanner.nextInt();
+
+
+                System.out.print("Day: ");
+
+                int ed =
+                        scanner.nextInt();
+
+
+                scanner.nextLine();
+
+
+
+
+                LocalDate expirationDate =
+                        LocalDate.of(
+                                ey,
+                                em,
+                                ed
+                        );
+
+
+
+
+
+                product =
+                        new FoodProduct(
+                                id,
+                                name,
+                                price,
+                                stock,
+                                productionDate,
+                                expirationDate
+                        );
+
+
+                break;
+
+
+
+
+
+
+
+
             default:
 
+
                 System.out.println(
-                        "Wrong type"
+                        "Invalid product type"
                 );
+
 
                 return;
 
         }
-
 
 
 
@@ -410,8 +633,10 @@ public class AdminView {
 
 
 
+
         Product product =
                 adminController.findProductById(id);
+
 
 
 
@@ -441,6 +666,7 @@ public class AdminView {
         );
 
     }
+
 
 
 }
