@@ -14,21 +14,15 @@ import java.util.List;
 public class InvoiceController {
 
 
-
     private List<Invoice> invoices;
-
-
 
 
 
     public InvoiceController() {
 
-
         invoices = new ArrayList<>();
 
     }
-
-
 
 
 
@@ -54,13 +48,9 @@ public class InvoiceController {
 
 
 
-
         double total =
                 buyer.getCart()
                         .getTotalPrice();
-
-
-
 
 
 
@@ -80,6 +70,32 @@ public class InvoiceController {
 
 
 
+        // بررسی نهایی موجودی قبل از خرید
+
+        for(CartItem item :
+                buyer.getCart().getItems()) {
+
+
+
+            if(item.getProduct().getStock()
+                    <
+                    item.getQuantity()) {
+
+
+                throw new RuntimeException(
+                        "Not enough stock for "
+                                +
+                                item.getProduct().getName()
+                );
+
+            }
+
+        }
+
+
+
+
+
 
         // کم کردن موجودی محصولات
 
@@ -90,10 +106,12 @@ public class InvoiceController {
 
             item.getProduct()
                     .setStock(
+
                             item.getProduct()
                                     .getStock()
                                     -
                                     item.getQuantity()
+
                     );
 
         }
@@ -108,10 +126,40 @@ public class InvoiceController {
         // کم کردن پول
 
         buyer.setWalletBalance(
+
                 buyer.getWalletBalance()
                         -
                         total
+
         );
+
+
+
+
+
+
+
+
+        // ساخت کپی از آیتم های خرید
+
+        List<CartItem> invoiceItems =
+                new ArrayList<>();
+
+
+        for(CartItem item :
+                buyer.getCart().getItems()) {
+
+
+            invoiceItems.add(
+
+                    new CartItem(
+                            item.getProduct(),
+                            item.getQuantity()
+                    )
+
+            );
+
+        }
 
 
 
@@ -122,10 +170,13 @@ public class InvoiceController {
 
         Invoice invoice =
                 new Invoice(
+
                         invoices.size()+1,
+
                         buyer,
-                        buyer.getCart()
-                                .getItems()
+
+                        invoiceItems
+
                 );
 
 
@@ -133,7 +184,10 @@ public class InvoiceController {
 
 
 
+
+
         invoices.add(invoice);
+
 
 
 
@@ -155,6 +209,7 @@ public class InvoiceController {
         return invoice;
 
     }
+
 
 
 

@@ -12,8 +12,6 @@ public class CartController {
 
 
 
-    // اضافه کردن محصول به سبد خرید
-
     public void addToCart(Buyer buyer,
                           Product product,
                           int quantity) {
@@ -33,8 +31,6 @@ public class CartController {
 
 
 
-        // بررسی موجودی انبار
-
         if(product.getStock() < quantity) {
 
 
@@ -48,23 +44,33 @@ public class CartController {
 
 
 
+
         Cart cart =
                 buyer.getCart();
+
+
 
 
 
 
         CartItem item =
                 new CartItem(
+
                         product,
+
                         quantity
+
                 );
+
+
 
 
 
 
         cart.addItem(item);
 
+
+
     }
 
 
@@ -74,19 +80,15 @@ public class CartController {
 
 
 
-    // حذف از سبد
 
     public void removeFromCart(Buyer buyer,
                                CartItem item) {
 
 
 
-        Cart cart =
-                buyer.getCart();
+        buyer.getCart()
+                .removeItem(item);
 
-
-
-        cart.removeItem(item);
 
     }
 
@@ -97,13 +99,13 @@ public class CartController {
 
 
 
-    // نمایش سبد
 
     public Cart viewCart(Buyer buyer) {
 
 
         return buyer.getCart();
 
+
     }
 
 
@@ -113,13 +115,13 @@ public class CartController {
 
 
 
-    // محاسبه مبلغ کل
 
     public double calculateTotal(Buyer buyer) {
 
 
         return buyer.getCart()
                 .getTotalPrice();
+
 
     }
 

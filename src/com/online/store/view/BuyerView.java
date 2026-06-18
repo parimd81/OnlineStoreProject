@@ -20,18 +20,13 @@ public class BuyerView {
 
     private Scanner scanner;
 
-
     private Buyer buyer;
-
 
     private ProductController productController;
 
-
     private CartController cartController;
 
-
     private InvoiceController invoiceController;
-
 
 
 
@@ -45,17 +40,15 @@ public class BuyerView {
 
         this.buyer = buyer;
 
-
         this.productController = productController;
-
 
         this.cartController = cartController;
 
 
-        this.invoiceController =
-                new InvoiceController();
+        invoiceController = new InvoiceController();
 
     }
+
 
 
 
@@ -72,29 +65,22 @@ public class BuyerView {
 
             System.out.println("1. Show Products");
 
-
             System.out.println("2. Search Product");
-
 
             System.out.println("3. Add Product To Cart");
 
-
             System.out.println("4. Show Cart");
-
 
             System.out.println("5. Checkout");
 
+            System.out.println("0. Back");
 
-            System.out.println("6. Logout");
 
 
             System.out.print("Choice: ");
 
 
-
-            int choice =
-                    scanner.nextInt();
-
+            int choice = scanner.nextInt();
 
             scanner.nextLine();
 
@@ -104,65 +90,43 @@ public class BuyerView {
             switch(choice) {
 
 
-
                 case 1:
-
                     showProducts();
-
                     break;
-
 
 
                 case 2:
-
                     searchProduct();
-
                     break;
-
 
 
                 case 3:
-
                     addToCart();
-
                     break;
-
 
 
                 case 4:
-
                     showCart();
-
                     break;
-
 
 
                 case 5:
-
                     checkout();
-
                     break;
 
 
-
-                case 6:
-
+                case 0:
                     return;
 
 
-
                 default:
-
-                    System.out.println(
-                            "Wrong choice"
-                    );
+                    System.out.println("Wrong choice");
 
             }
 
         }
 
     }
-
 
 
 
@@ -177,18 +141,7 @@ public class BuyerView {
 
 
 
-        if(products.isEmpty()) {
-
-
-            System.out.println(
-                    "No products available"
-            );
-
-
-            return;
-
-        }
-
+        System.out.println("\n===== Products =====");
 
 
 
@@ -210,14 +163,10 @@ public class BuyerView {
     private void searchProduct() {
 
 
-        System.out.print(
-                "Enter product name: "
-        );
-
+        System.out.print("Enter product name: ");
 
         String name =
                 scanner.nextLine();
-
 
 
 
@@ -226,19 +175,14 @@ public class BuyerView {
 
 
 
-
         if(result.isEmpty()) {
 
 
-            System.out.println(
-                    "Product not found"
-            );
-
+            System.out.println("Product not found");
 
             return;
 
         }
-
 
 
 
@@ -257,6 +201,7 @@ public class BuyerView {
 
 
 
+
     private void addToCart() {
 
 
@@ -264,13 +209,21 @@ public class BuyerView {
 
 
 
-        System.out.print(
-                "Enter product ID: "
-        );
+        System.out.println("0. Back");
+
+        System.out.print("Enter product ID: ");
 
 
         String id =
                 scanner.nextLine();
+
+
+
+        if(id.equals("0")) {
+
+            return;
+
+        }
 
 
 
@@ -280,14 +233,10 @@ public class BuyerView {
 
 
 
-
         if(product == null) {
 
 
-            System.out.println(
-                    "Product not found"
-            );
-
+            System.out.println("Product not found");
 
             return;
 
@@ -297,15 +246,11 @@ public class BuyerView {
 
 
 
-        System.out.print(
-                "Enter quantity: "
-        );
-
+        System.out.print("Enter quantity: ");
 
 
         int quantity =
                 scanner.nextInt();
-
 
 
         scanner.nextLine();
@@ -321,12 +266,13 @@ public class BuyerView {
 
 
 
-
         System.out.println(
                 "Product added to cart"
         );
 
+
     }
+
 
 
 
@@ -337,10 +283,7 @@ public class BuyerView {
     private void showCart() {
 
 
-        System.out.println(
-                "\n===== Your Cart ====="
-        );
-
+        System.out.println("\n===== Your Cart =====");
 
 
         System.out.println(
@@ -355,7 +298,9 @@ public class BuyerView {
                         cartController.calculateTotal(buyer)
         );
 
+
     }
+
 
 
 
@@ -369,10 +314,8 @@ public class BuyerView {
         try {
 
 
-
             Invoice invoice =
                     invoiceController.checkout(buyer);
-
 
 
 
@@ -395,6 +338,7 @@ public class BuyerView {
             );
 
         }
+
 
     }
 

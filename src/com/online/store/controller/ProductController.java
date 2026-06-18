@@ -4,6 +4,7 @@ package com.online.store.controller;
 import com.online.store.model.products.Product;
 import com.online.store.model.products.digital.FlashMemory;
 import com.online.store.model.products.digital.SSD;
+import com.online.store.storage.FileManager;
 
 
 import java.util.ArrayList;
@@ -14,17 +15,31 @@ import java.util.List;
 public class ProductController {
 
 
+
+    private static ProductController instance;
+
+
     private List<Product> products;
 
 
 
-    public ProductController() {
+    private final String FILE_PATH =
+            "data/products.txt";
+
+
+
+
+
+
+
+    private ProductController() {
 
 
         products = new ArrayList<>();
 
 
-        loadSampleProducts();
+        loadProducts();
+
 
     }
 
@@ -32,25 +47,66 @@ public class ProductController {
 
 
 
-    // اضافه کردن محصول جدید
+
+
+    public static ProductController getInstance() {
+
+
+        if(instance == null) {
+
+
+            instance =
+                    new ProductController();
+
+        }
+
+
+        return instance;
+
+    }
+
+
+
+
+
+
+
+
 
     public void addProduct(Product product) {
 
 
         products.add(product);
 
+
+        saveProducts();
+
     }
 
 
 
 
 
-    // حذف محصول
+
+
+
 
     public boolean removeProduct(Product product) {
 
 
-        return products.remove(product);
+        boolean result =
+                products.remove(product);
+
+
+
+        if(result){
+
+            saveProducts();
+
+        }
+
+
+        return result;
 
     }
 
@@ -58,7 +114,9 @@ public class ProductController {
 
 
 
-    // گرفتن همه محصولات
+
+
+
 
     public List<Product> getAllProducts() {
 
@@ -71,15 +129,20 @@ public class ProductController {
 
 
 
-    // پیدا کردن محصول با ID
+
+
+
 
     public Product findById(String id) {
+
 
 
         for(Product product : products) {
 
 
-            if(product.getId().equals(id)) {
+
+            if(product.getId()
+                    .equals(id)) {
 
 
                 return product;
@@ -97,16 +160,21 @@ public class ProductController {
 
 
 
-    // جستجو بر اساس نام
+
+
+
 
     public List<Product> searchByName(String keyword) {
+
 
 
         List<Product> result =
                 new ArrayList<>();
 
 
+
         for(Product product : products) {
+
 
 
             if(product.getName()
@@ -129,14 +197,18 @@ public class ProductController {
 
 
 
-    // فیلتر قیمت
+
+
+
 
     public List<Product> filterByPrice(double min,
                                        double max) {
 
 
+
         List<Product> result =
                 new ArrayList<>();
+
 
 
         for(Product product : products) {
@@ -162,13 +234,17 @@ public class ProductController {
 
 
 
-    // نمایش کالاهای موجود
+
+
+
 
     public List<Product> filterAvailableProducts() {
 
 
+
         List<Product> result =
                 new ArrayList<>();
+
 
 
         for(Product product : products) {
@@ -192,13 +268,204 @@ public class ProductController {
 
 
 
-    // اضافه کردن محصولات اولیه برای تست
+
+
+
+
+    private void saveProducts(){
+
+
+        List<String> data =
+                new ArrayList<>();
+
+
+
+        for(Product product : products){
+
+
+
+            if(product instanceof SSD){
+
+
+                SSD ssd =
+                        (SSD) product;
+
+
+
+                data.add(
+                        "SSD,"
+                                + ssd.getId()
+                                + ","
+                                + ssd.getName()
+                                + ","
+                                + ssd.getPrice()
+                                + ","
+                                + ssd.getStock()
+                                + ","
+                                + ssd.getBrand()
+                                + ","
+                                + ssd.getCapacityGB()
+                );
+
+
+            }
+
+
+
+
+            else if(product instanceof FlashMemory){
+
+
+                FlashMemory flash =
+                        (FlashMemory) product;
+
+
+
+                data.add(
+                        "FlashMemory,"
+                                + flash.getId()
+                                + ","
+                                + flash.getName()
+                                + ","
+                                + flash.getPrice()
+                                + ","
+                                + flash.getStock()
+                                + ","
+                                + flash.getBrand()
+                                + ","
+                                + flash.getUsbVersion()
+                );
+
+            }
+
+
+        }
+
+
+
+        FileManager.writeFile(
+                FILE_PATH,
+                data
+        );
+
+
+    }
+
+
+
+
+
+
+
+
+
+    private void loadProducts(){
+
+
+
+        List<String> data =
+                FileManager.readFile(
+                        FILE_PATH
+                );
+
+
+
+
+        if(data.isEmpty()){
+
+
+            loadSampleProducts();
+
+
+            saveProducts();
+
+
+            return;
+
+        }
+
+
+
+
+
+
+
+        for(String line : data){
+
+
+
+            String[] parts =
+                    line.split(",");
+
+
+
+
+            if(parts[0].equals("SSD")){
+
+
+                products.add(
+
+                        new SSD(
+
+                                parts[1],
+                                parts[2],
+                                Double.parseDouble(parts[3]),
+                                Integer.parseInt(parts[4]),
+                                parts[5],
+                                Integer.parseInt(parts[6])
+
+                        )
+
+                );
+
+            }
+
+
+
+
+
+
+            else if(parts[0].equals("FlashMemory")){
+
+
+                products.add(
+
+                        new FlashMemory(
+
+                                parts[1],
+                                parts[2],
+                                Double.parseDouble(parts[3]),
+                                Integer.parseInt(parts[4]),
+                                parts[5],
+                                Integer.parseInt(parts[6])
+
+                        )
+
+                );
+
+
+            }
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
 
     private void loadSampleProducts() {
 
 
 
-        Product ssd =
+        products.add(
+
                 new SSD(
                         "1",
                         "Samsung SSD",
@@ -206,11 +473,16 @@ public class ProductController {
                         10,
                         "Samsung",
                         512
-                );
+                )
+
+        );
 
 
 
-        Product flash =
+
+
+        products.add(
+
                 new FlashMemory(
                         "2",
                         "Kingston Flash Memory",
@@ -218,15 +490,13 @@ public class ProductController {
                         20,
                         "Kingston",
                         3
-                );
+                )
 
+        );
 
-
-        products.add(ssd);
-
-        products.add(flash);
 
     }
+
 
 
 }

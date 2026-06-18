@@ -1,0 +1,2 @@
+SSD,1,Samsung SSD,5000.0,10,Samsung,512
+FlashMemory,2,Kingston Flash Memory,1000.0,20,Kingston,3

@@ -25,6 +25,8 @@ public class MainView {
     private AuthController authController;
 
 
+    private ProductController productController;
+
 
 
 
@@ -37,8 +39,12 @@ public class MainView {
         authController =
                 new AuthController();
 
-    }
 
+
+        productController =
+                ProductController.getInstance();
+
+    }
 
 
 
@@ -127,7 +133,6 @@ public class MainView {
 
 
 
-
     private void register() {
 
 
@@ -175,13 +180,11 @@ public class MainView {
 
 
 
-
         System.out.println(
                 "Register successful"
         );
 
     }
-
 
 
 
@@ -202,13 +205,10 @@ public class MainView {
 
 
 
-
         System.out.print("Password: ");
 
         String password =
                 scanner.nextLine();
-
-
 
 
 
@@ -243,7 +243,6 @@ public class MainView {
 
 
 
-
         System.out.println(
                 "Login successful"
         );
@@ -264,9 +263,19 @@ public class MainView {
 
 
 
+
+            AdminController adminController =
+                    new AdminController(
+                            productController
+                    );
+
+
+
+
+
             AdminView adminView =
                     new AdminView(
-                            new AdminController()
+                            adminController
                     );
 
 
@@ -293,12 +302,14 @@ public class MainView {
 
 
 
+
             BuyerView buyerView =
                     new BuyerView(
                             (Buyer) user,
-                            new ProductController(),
+                            productController,
                             new CartController()
                     );
+
 
 
 

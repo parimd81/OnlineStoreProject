@@ -11,14 +11,18 @@ import java.util.List;
 public class AdminController {
 
 
+
     private ProductController productController;
+
+
 
 
 
     public AdminController(ProductController productController) {
 
 
-        this.productController = productController;
+        this.productController =
+                productController;
 
     }
 
@@ -45,10 +49,10 @@ public class AdminController {
 
     // حذف محصول
 
-    public void removeProduct(Product product) {
+    public boolean removeProduct(Product product) {
 
 
-        productController.removeProduct(product);
+        return productController.removeProduct(product);
 
     }
 
@@ -60,7 +64,7 @@ public class AdminController {
 
     // گرفتن همه محصولات
 
-    public List<Product> getProducts() {
+    public List<Product> getAllProducts() {
 
 
         return productController.getAllProducts();
@@ -73,7 +77,7 @@ public class AdminController {
 
 
 
-    // پیدا کردن محصول با ID
+    // پیدا کردن محصول
 
     public Product findProductById(String id) {
 
@@ -81,6 +85,7 @@ public class AdminController {
         return productController.findById(id);
 
     }
+
 
 
 }

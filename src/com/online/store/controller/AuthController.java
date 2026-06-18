@@ -14,6 +14,7 @@ import java.util.List;
 public class AuthController {
 
 
+
     private List<User> users;
 
 
@@ -29,7 +30,7 @@ public class AuthController {
         users = new ArrayList<>();
 
 
-        // اضافه کردن ادمین پیش فرض
+        // ساخت Admin پیش فرض
 
         users.add(
                 Admin.getInstance()
@@ -41,9 +42,12 @@ public class AuthController {
 
 
 
+
+    // ثبت نام Buyer
+
     public void register(String username,
                          String email,
-                         String phoneNumber,
+                         String phone,
                          String password) {
 
 
@@ -52,10 +56,10 @@ public class AuthController {
                 new Buyer(
                         username,
                         email,
-                        phoneNumber,
-                        password,
-                        10000
+                        phone,
+                        password
                 );
+
 
 
         users.add(buyer);
@@ -68,12 +72,18 @@ public class AuthController {
 
 
 
+    // ورود کاربر
+
     public boolean login(String username,
                          String password) {
 
 
+
         User user =
-                getUser(username, password);
+                getUser(
+                        username,
+                        password
+                );
 
 
 
@@ -98,6 +108,9 @@ public class AuthController {
 
 
 
+
+
+    // پیدا کردن کاربر
 
     public User getUser(String username,
                         String password) {
@@ -134,12 +147,16 @@ public class AuthController {
 
 
 
+    // گرفتن کاربر لاگین شده
+
     public User getCurrentUser() {
 
 
         return currentUser;
 
     }
+
+
 
 
 
