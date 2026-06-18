@@ -1,8 +1,22 @@
 package com.online.store;
 
+
+import com.online.store.view.MainView;
+
+
+
 public class Main {
 
+
     public static void main(String[] args) {
-	// write your code here
+
+
+        MainView view =
+                new MainView();
+
+
+        view.showMenu();
+
     }
+
 }
