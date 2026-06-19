@@ -1,6 +1,7 @@
 package com.online.store.model.users;
 
 
+
 public class Admin extends User {
 
 
@@ -8,56 +9,31 @@ public class Admin extends User {
 
 
 
-    private Admin(String username,
-                  String email,
-                  String phoneNumber,
-                  String password) {
+    private Admin(){
 
-
-        super(username, email, phoneNumber, password);
+        super(
+                "admin",
+                "admin@store.com",
+                "09120000000",
+                "Admin123",
+                Role.ADMIN
+        );
 
     }
 
 
 
 
-
-    public static Admin getInstance() {
-
-
-        if(instance == null) {
+    public static Admin getInstance(){
 
 
-            instance =
-                    new Admin(
-                            "admin",
-                            "admin@gmail.com",
-                            "0000000000",
-                            "admin123"
-                    );
-
-        }
+        if(instance==null)
+            instance=new Admin();
 
 
         return instance;
 
     }
 
-
-
-
-
-
-    @Override
-    public String toString() {
-
-
-        return "Admin{" +
-                "username='" + getUsername() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", phoneNumber='" + getPhoneNumber() + '\'' +
-                '}';
-
-    }
 
 }

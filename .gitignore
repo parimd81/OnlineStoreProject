@@ -1,0 +1,12 @@
+# IntelliJ
+.idea/
+
+# Java compiled files
+out/
+*.class
+
+# Build files
+target/
+
+# OS files
+.DS_Store

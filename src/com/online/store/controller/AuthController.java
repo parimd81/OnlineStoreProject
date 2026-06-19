@@ -2,7 +2,7 @@ package com.online.store.controller;
 
 
 import com.online.store.model.users.Admin;
-import com.online.store.model.users.Buyer;
+import com.online.store.model.users.Customer;
 import com.online.store.model.users.User;
 
 
@@ -14,27 +14,19 @@ import java.util.List;
 public class AuthController {
 
 
-
-    private List<User> users;
+    private List<User> users =
+            new ArrayList<>();
 
 
     private User currentUser;
 
 
 
+    public AuthController(){
 
 
-    public AuthController() {
+        users.add(Admin.getInstance());
 
-
-        users = new ArrayList<>();
-
-
-        // ساخت Admin پیش فرض
-
-        users.add(
-                Admin.getInstance()
-        );
 
     }
 
@@ -43,17 +35,16 @@ public class AuthController {
 
 
 
-    // ثبت نام Buyer
+    public Customer registerCustomer(
+            String username,
+            String email,
+            String phone,
+            String password
+    ){
 
-    public void register(String username,
-                         String email,
-                         String phone,
-                         String password) {
 
-
-
-        Buyer buyer =
-                new Buyer(
+        Customer customer =
+                new Customer(
                         username,
                         email,
                         phone,
@@ -61,8 +52,11 @@ public class AuthController {
                 );
 
 
+        users.add(customer);
 
-        users.add(buyer);
+
+        return customer;
+
 
     }
 
@@ -72,72 +66,33 @@ public class AuthController {
 
 
 
-    // ورود کاربر
-
-    public boolean login(String username,
-                         String password) {
-
-
-
-        User user =
-                getUser(
-                        username,
-                        password
-                );
+    public boolean login(
+            String username,
+            String password
+    ){
 
 
-
-        if(user != null) {
-
-
-            currentUser = user;
-
-
-            return true;
-
-        }
-
-
-
-        return false;
-
-    }
-
-
-
-
-
-
-
-
-    // پیدا کردن کاربر
-
-    public User getUser(String username,
-                        String password) {
-
-
-
-        for(User user : users) {
-
+        for(User user : users){
 
 
             if(user.getUsername()
                     .equals(username)
                     &&
                     user.getPassword()
-                            .equals(password)) {
+                            .equals(password)){
 
 
+                currentUser=user;
 
-                return user;
+                return true;
 
             }
 
         }
 
 
+        return false;
 
-        return null;
 
     }
 
@@ -147,10 +102,7 @@ public class AuthController {
 
 
 
-    // گرفتن کاربر لاگین شده
-
-    public User getCurrentUser() {
-
+    public User getCurrentUser(){
 
         return currentUser;
 
@@ -158,6 +110,12 @@ public class AuthController {
 
 
 
+
+    public List<User> getUsers(){
+
+        return users;
+
+    }
 
 
 }

@@ -1,0 +1,3 @@
+ADMIN,admin,admin@gmail.com,0000000000,admin123
+BUYER,admin,ali@gmail.com,123456,1234
+BUYER,admin,ali@gmail.com,123456,1234

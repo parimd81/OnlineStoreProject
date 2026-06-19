@@ -1,10 +1,10 @@
 package com.online.store.controller;
 
 
-import com.online.store.model.products.Product;
-
-
-import java.util.List;
+import com.online.store.model.product.Comment;
+import com.online.store.model.product.Product;
+import com.online.store.service.ProductService;
+import com.online.store.service.RequestService;
 
 
 
@@ -12,32 +12,21 @@ public class AdminController {
 
 
 
-    private ProductController productController;
+    private ProductService productService;
+
+    private RequestService requestService;
 
 
 
 
+    public AdminController(
+            ProductService productService,
+            RequestService requestService
+    ){
 
-    public AdminController(ProductController productController) {
+        this.productService=productService;
 
-
-        this.productController =
-                productController;
-
-    }
-
-
-
-
-
-
-
-    // اضافه کردن محصول
-
-    public void addProduct(Product product) {
-
-
-        productController.addProduct(product);
+        this.requestService=requestService;
 
     }
 
@@ -46,13 +35,9 @@ public class AdminController {
 
 
 
+    public void addProduct(Product product){
 
-    // حذف محصول
-
-    public boolean removeProduct(Product product) {
-
-
-        return productController.removeProduct(product);
+        productService.addProduct(product);
 
     }
 
@@ -61,13 +46,9 @@ public class AdminController {
 
 
 
+    public void deleteProduct(int id){
 
-    // گرفتن همه محصولات
-
-    public List<Product> getAllProducts() {
-
-
-        return productController.getAllProducts();
+        productService.removeProduct(id);
 
     }
 
@@ -76,13 +57,20 @@ public class AdminController {
 
 
 
+    public void approveComment(Comment comment){
 
-    // پیدا کردن محصول
+        comment.approve();
 
-    public Product findProductById(String id) {
+    }
 
 
-        return productController.findById(id);
+
+
+
+
+    public void rejectComment(Comment comment){
+
+        comment.reject();
 
     }
 

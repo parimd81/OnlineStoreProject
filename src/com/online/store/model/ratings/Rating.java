@@ -1,7 +1,7 @@
 package com.online.store.model.ratings;
 
 
-import com.online.store.model.products.Product;
+import com.online.store.model.product.Product;
 import com.online.store.model.users.Buyer;
 
 
