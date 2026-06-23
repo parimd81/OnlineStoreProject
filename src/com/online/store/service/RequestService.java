@@ -3,6 +3,9 @@ package com.online.store.service;
 
 
 import com.online.store.model.request.Request;
+import com.online.store.model.request.RequestStatus;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +16,50 @@ public class RequestService {
 
 
 
-    private List<Request> requests =
-            new ArrayList<>();
+    private static RequestService instance;
+
+
+    private List<Request> requests;
+
+
+
+
+
+
+
+    private RequestService(){
+
+
+        requests =
+                new ArrayList<>();
+
+
+    }
+
+
+
+
+
+
+
+    public static RequestService getInstance(){
+
+
+
+        if(instance==null){
+
+            instance =
+                    new RequestService();
+
+        }
+
+
+        return instance;
+
+
+    }
+
+
 
 
 
@@ -23,18 +68,9 @@ public class RequestService {
 
     public void createRequest(Request request){
 
+
         requests.add(request);
 
-    }
-
-
-
-
-
-
-    public List<Request> getRequests(){
-
-        return requests;
 
     }
 
@@ -43,19 +79,37 @@ public class RequestService {
 
 
 
-    public void acceptRequest(int id){
 
 
-        for(Request r : requests){
+
+    public List<Request> getPendingRequests(){
 
 
-            if(r.getId()==id){
 
-                r.accept();
+        List<Request> result =
+                new ArrayList<>();
+
+
+
+        for(Request r: requests){
+
+
+            if(r.getStatus()
+                    ==
+                    RequestStatus.PENDING){
+
+
+                result.add(r);
 
             }
 
+
         }
+
+
+
+        return result;
+
 
     }
 
@@ -65,21 +119,33 @@ public class RequestService {
 
 
 
-    public void rejectRequest(int id){
+
+    public void approveRequest(Request request){
 
 
-        for(Request r : requests){
+        request.approve();
 
-
-            if(r.getId()==id){
-
-                r.reject();
-
-            }
-
-        }
 
     }
+
+
+
+
+
+
+
+
+
+    public void rejectRequest(Request request){
+
+
+        request.reject();
+
+
+    }
+
+
+
 
 
 }

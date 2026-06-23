@@ -9,10 +9,10 @@ public class Rating {
 
 
 
-    private Customer customer;
+    private Customer user;
 
 
-    private int productId;
+    private Product product;
 
 
     private int score;
@@ -22,46 +22,54 @@ public class Rating {
 
 
 
-    public Rating(Customer customer,
-                  int productId,
+    public Rating(Customer user,
+                  Product product,
                   int score){
-
-
-
-        if(!customer.hasBoughtProduct(productId)){
-
-
-            throw new IllegalStateException(
-                    "Only buyers can rate this product."
-            );
-
-
-        }
-
 
 
 
         if(score < 1 || score > 5){
 
-
             throw new IllegalArgumentException(
                     "Score must be between 1 and 5"
             );
-
 
         }
 
 
 
-        this.customer=customer;
+        this.user=user;
 
-        this.productId=productId;
+
+        this.product=product;
+
 
         this.score=score;
 
 
     }
 
+
+
+
+
+
+    public Customer getUser(){
+
+        return user;
+
+    }
+
+
+
+
+
+
+    public Product getProduct(){
+
+        return product;
+
+    }
 
 
 
@@ -74,22 +82,6 @@ public class Rating {
 
     }
 
-
-
-
-    public int getProductId(){
-
-        return productId;
-
-    }
-
-
-
-    public Customer getCustomer(){
-
-        return customer;
-
-    }
 
 
 }

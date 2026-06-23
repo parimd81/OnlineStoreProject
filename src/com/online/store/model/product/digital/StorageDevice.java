@@ -1,38 +1,36 @@
 package com.online.store.model.product.digital;
 
 
-public abstract class StorageDevice extends DigitalProduct {
 
+public abstract class StorageDevice extends DigitalProduct {
 
 
     protected int capacity;
 
 
 
+    public StorageDevice(int id,
+                         String name,
+                         double price,
+                         int quantity,
+                         double weight,
+                         String dimension,
+                         int capacity){
 
-    public StorageDevice(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            double weight,
-            String dimensions,
-            int capacity
-    ){
 
-        super(
-                id,
+        super(id,
                 name,
                 price,
-                stock,
+                quantity,
                 weight,
-                dimensions
-        );
+                dimension);
 
 
-        this.capacity=capacity;
+        this.capacity = capacity;
+
 
     }
+
 
 
 
@@ -42,5 +40,27 @@ public abstract class StorageDevice extends DigitalProduct {
         return capacity;
 
     }
+
+
+
+
+    public void setCapacity(int capacity){
+
+
+        if(capacity < 0){
+
+            throw new IllegalArgumentException(
+                    "Capacity cannot be negative"
+            );
+
+        }
+
+
+        this.capacity = capacity;
+
+
+    }
+
+
 
 }

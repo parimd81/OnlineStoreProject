@@ -1,5 +1,6 @@
 package com.online.store.model.product.digital;
 
+
 import com.online.store.model.product.Product;
 import com.online.store.model.product.category.Category;
 
@@ -10,34 +11,37 @@ public abstract class DigitalProduct extends Product {
 
     protected double weight;
 
-    protected String dimensions;
+
+    protected String dimension;
 
 
 
-    public DigitalProduct(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            double weight,
-            String dimensions
-    ){
+
+    public DigitalProduct(int id,
+                          String name,
+                          double price,
+                          int quantity,
+                          double weight,
+                          String dimension){
 
 
         super(
                 id,
                 name,
                 price,
-                stock,
+                quantity,
                 Category.DIGITAL
         );
 
 
+
         this.weight = weight;
 
-        this.dimensions = dimensions;
+        this.dimension = dimension;
+
 
     }
+
 
 
 
@@ -49,12 +53,37 @@ public abstract class DigitalProduct extends Product {
     }
 
 
+    public void setWeight(double weight){
 
-    public String getDimensions(){
+        if(weight < 0){
 
-        return dimensions;
+            throw new IllegalArgumentException(
+                    "Weight cannot be negative"
+            );
+
+        }
+
+        this.weight = weight;
 
     }
+
+
+
+
+
+    public String getDimension(){
+
+        return dimension;
+
+    }
+
+
+    public void setDimension(String dimension){
+
+        this.dimension = dimension;
+
+    }
+
 
 
 }

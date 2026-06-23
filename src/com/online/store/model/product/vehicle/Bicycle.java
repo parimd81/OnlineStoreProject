@@ -1,26 +1,10 @@
 package com.online.store.model.product.vehicle;
 
+
 public class Bicycle extends Vehicle {
 
 
-
-    public enum BikeType{
-
-        MOUNTAIN,
-        ROAD,
-        URBAN,
-        HYBRID
-
-    }
-
-
-
-
-
-    private BikeType type;
-
-
-
+    private BicycleType type;
 
 
 
@@ -28,36 +12,42 @@ public class Bicycle extends Vehicle {
             int id,
             String name,
             double price,
-            boolean stock,
-            String manufacturer,
-            BikeType type
-    ){
+            int quantity,
+            String productionDate,
+            String companyName,
+            BicycleType type
+    ) {
 
 
         super(
                 id,
                 name,
                 price,
-                stock,
-                manufacturer
+                quantity,
+                productionDate,
+                companyName
         );
 
 
-        this.type=type;
-
+        this.type = type;
 
     }
 
 
 
-
-
-    public BikeType getType(){
+    public BicycleType getType() {
 
         return type;
 
     }
 
+
+
+    public void setType(BicycleType type){
+
+        this.type = type;
+
+    }
 
 
 }

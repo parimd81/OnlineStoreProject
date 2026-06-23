@@ -1,11 +1,12 @@
 package com.online.store.model.product.stationery;
 
 
+
 public class Notebook extends Stationery {
 
 
 
-    private int pageCount;
+    private int pages;
 
 
     private String paperType;
@@ -14,30 +15,28 @@ public class Notebook extends Stationery {
 
 
 
-
-    public Notebook(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            String country,
-            int pageCount,
-            String paperType
-    ){
+    public Notebook(int id,
+                    String name,
+                    double price,
+                    int quantity,
+                    String countryOfOrigin,
+                    int pages,
+                    String paperType){
 
 
-        super(
-                id,
+
+        super(id,
                 name,
                 price,
-                stock,
-                country
-        );
+                quantity,
+                countryOfOrigin);
 
 
-        this.pageCount=pageCount;
 
-        this.paperType=paperType;
+        this.pages = pages;
+
+
+        this.paperType = paperType;
 
 
     }
@@ -46,11 +45,14 @@ public class Notebook extends Stationery {
 
 
 
-    public int getPageCount(){
 
-        return pageCount;
+    public int getPages(){
+
+        return pages;
 
     }
+
+
 
 
 
@@ -60,6 +62,29 @@ public class Notebook extends Stationery {
         return paperType;
 
     }
+
+
+
+
+
+
+    public void setPages(int pages){
+
+        this.pages = pages;
+
+    }
+
+
+
+
+
+
+    public void setPaperType(String paperType){
+
+        this.paperType = paperType;
+
+    }
+
 
 
 }

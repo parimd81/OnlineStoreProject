@@ -42,6 +42,19 @@ public class AuthController {
             String password
     ){
 
+        // check duplicate username
+        for(User user : users){
+
+            if(user.getUsername().equals(username)){
+
+                throw new IllegalArgumentException(
+                        "Username already exists"
+                );
+
+            }
+
+        }
+
 
         Customer customer =
                 new Customer(
@@ -56,7 +69,6 @@ public class AuthController {
 
 
         return customer;
-
 
     }
 

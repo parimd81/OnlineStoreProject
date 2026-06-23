@@ -1,6 +1,7 @@
 package com.online.store.model.product.stationery;
 
 
+
 public class Pen extends Stationery {
 
 
@@ -11,26 +12,23 @@ public class Pen extends Stationery {
 
 
 
-    public Pen(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            String country,
-            String color
-    ){
+    public Pen(int id,
+               String name,
+               double price,
+               int quantity,
+               String countryOfOrigin,
+               String color){
 
 
-        super(
-                id,
+        super(id,
                 name,
                 price,
-                stock,
-                country
-        );
+                quantity,
+                countryOfOrigin);
 
 
-        this.color=color;
+
+        this.color = color;
 
 
     }
@@ -45,6 +43,18 @@ public class Pen extends Stationery {
         return color;
 
     }
+
+
+
+
+
+
+    public void setColor(String color){
+
+        this.color = color;
+
+    }
+
 
 
 }

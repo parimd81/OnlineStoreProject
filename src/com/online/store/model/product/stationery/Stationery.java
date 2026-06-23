@@ -1,5 +1,6 @@
 package com.online.store.model.product.stationery;
 
+
 import com.online.store.model.product.Product;
 import com.online.store.model.product.category.Category;
 
@@ -9,43 +10,53 @@ public abstract class Stationery extends Product {
 
 
 
-    protected String manufacturerCountry;
+    protected String countryOfOrigin;
 
 
 
+    public Stationery(int id,
+                      String name,
+                      double price,
+                      int quantity,
+                      String countryOfOrigin){
 
 
-    public Stationery(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            String manufacturerCountry
-    ){
-
-
-        super(
-                id,
+        super(id,
                 name,
                 price,
-                stock,
-                Category.STATIONERY
-        );
+                quantity,
+                Category.STATIONERY);
 
 
-        this.manufacturerCountry=
-                manufacturerCountry;
 
+        this.countryOfOrigin = countryOfOrigin;
 
     }
 
 
 
-    public String getManufacturerCountry(){
 
-        return manufacturerCountry;
+
+
+
+    public String getCountryOfOrigin(){
+
+        return countryOfOrigin;
 
     }
+
+
+
+
+
+
+
+    public void setCountryOfOrigin(String countryOfOrigin){
+
+        this.countryOfOrigin = countryOfOrigin;
+
+    }
+
 
 
 }

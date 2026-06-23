@@ -3,105 +3,100 @@ package com.online.store.model.product;
 
 import com.online.store.model.users.Customer;
 
-
+import com.online.store.model.review.ReviewStatus;
 
 public class Comment {
 
 
-
-    public enum Status{
-
-        PENDING,
-        APPROVED,
-        REJECTED
-
-    }
+    private Customer user;
 
 
-
-
-
-    private Customer customer;
-
-
-    private int productId;
+    private Product product;
 
 
     private String text;
 
 
-    private Status status =
-            Status.PENDING;
+    private ReviewStatus status;
 
 
 
-
-    private boolean hasBought;
-
-
-
-
-
-
-    public Comment(Customer customer,
-                   int productId,
+    public Comment(Customer user,
+                   Product product,
                    String text){
 
 
+        this.user = user;
 
-        this.customer=customer;
+        this.product = product;
 
-        this.productId=productId;
+        this.text = text;
 
-        this.text=text;
-
-
-
-        this.hasBought =
-                customer.hasBoughtProduct(productId);
-
+        // هر نظر جدید ابتدا در انتظار تایید است
+        this.status = ReviewStatus.PENDING;
 
     }
 
 
 
 
-
-
-
+    // تایید نظر توسط مدیر
 
     public void approve(){
 
-        status=Status.APPROVED;
+        this.status = ReviewStatus.APPROVED;
 
     }
 
 
 
+
+    // رد نظر توسط مدیر
 
     public void reject(){
 
-        status=Status.REJECTED;
+        this.status = ReviewStatus.REJECTED;
 
     }
 
 
 
 
+    // بررسی تایید بودن نظر
 
-    public boolean isHasBought(){
+    public boolean isApproved(){
 
-        return hasBought;
+        return status == ReviewStatus.APPROVED;
 
     }
 
 
 
 
+    // گرفتن وضعیت نظر
 
-    public Status getStatus(){
+    public ReviewStatus getStatus(){
 
         return status;
+
+    }
+
+
+
+
+    public Customer getUser(){
+
+        return user;
+
+    }
+
+
+
+
+
+    public Product getProduct(){
+
+        return product;
 
     }
 
@@ -114,14 +109,5 @@ public class Comment {
         return text;
 
     }
-
-
-
-    public int getProductId(){
-
-        return productId;
-
-    }
-
 
 }

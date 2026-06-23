@@ -1,7 +1,6 @@
 package com.online.store.model.product.category;
 
 
-
 public enum Category {
 
 
@@ -11,7 +10,10 @@ public enum Category {
 
     VEHICLE,
 
-    FOOD
+    FOOD,
+
+    OTHER
 
 
-}
+
+    }

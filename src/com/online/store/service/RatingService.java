@@ -23,7 +23,7 @@ public class RatingService {
         Rating rating =
                 new Rating(
                         customer,
-                        product.getId(),
+                        product,
                         score
                 );
 

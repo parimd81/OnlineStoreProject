@@ -1,20 +1,8 @@
 package com.online.store.model.product.stationery;
 
 
+
 public class Pencil extends Stationery {
-
-
-
-    public enum PencilType{
-
-        HB,
-        B,
-        F,
-        H,
-        H2
-
-    }
-
 
 
 
@@ -24,26 +12,23 @@ public class Pencil extends Stationery {
 
 
 
-    public Pencil(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            String country,
-            PencilType type
-    ){
+    public Pencil(int id,
+                  String name,
+                  double price,
+                  int quantity,
+                  String countryOfOrigin,
+                  PencilType type){
 
 
-        super(
-                id,
+        super(id,
                 name,
                 price,
-                stock,
-                country
-        );
+                quantity,
+                countryOfOrigin);
 
 
-        this.type=type;
+
+        this.type = type;
 
 
     }
@@ -52,9 +37,21 @@ public class Pencil extends Stationery {
 
 
 
+
     public PencilType getType(){
 
         return type;
+
+    }
+
+
+
+
+
+
+    public void setType(PencilType type){
+
+        this.type = type;
 
     }
 

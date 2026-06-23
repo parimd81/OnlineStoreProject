@@ -1,7 +1,7 @@
 package com.online.store.model.request;
 
 
-import com.online.store.model.users.Customer;
+import com.online.store.model.users.User;
 
 
 
@@ -11,7 +11,7 @@ public class Request {
     private int id;
 
 
-    private Customer customer;
+    private User requester;
 
 
     private String description;
@@ -22,31 +22,39 @@ public class Request {
 
 
 
-    public Request(
-            int id,
-            Customer customer,
-            String description
-    ){
 
-        this.id=id;
+    public Request(int id,
+                   User requester,
+                   String description){
 
-        this.customer=customer;
 
-        this.description=description;
 
-        this.status=RequestStatus.PENDING;
+        this.id = id;
+
+
+        this.requester = requester;
+
+
+        this.description = description;
+
+
+        this.status =
+                RequestStatus.PENDING;
+
+
+    }
+
+
+
+
+
+
+    public void approve(){
+
+        status = RequestStatus.APPROVED;
 
     }
 
-
-
-
-
-    public void accept(){
-
-        status=RequestStatus.ACCEPTED;
-
-    }
 
 
 
@@ -54,10 +62,9 @@ public class Request {
 
     public void reject(){
 
-        status=RequestStatus.REJECTED;
+        status = RequestStatus.REJECTED;
 
     }
-
 
 
 
@@ -74,11 +81,13 @@ public class Request {
 
 
 
-    public Customer getCustomer(){
 
-        return customer;
+    public User getRequester(){
+
+        return requester;
 
     }
+
 
 
 
@@ -94,11 +103,24 @@ public class Request {
 
 
 
+
     public RequestStatus getStatus(){
 
         return status;
 
     }
+
+
+
+
+
+
+    public void setStatus(RequestStatus status){
+
+        this.status=status;
+
+    }
+
 
 
 }

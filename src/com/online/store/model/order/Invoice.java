@@ -1,13 +1,11 @@
 package com.online.store.model.order;
 
 
-import com.online.store.model.product.Product;
-
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.ArrayList;
+
+import java.util.List;
 
 
 
@@ -24,11 +22,7 @@ public class Invoice {
     private double total;
 
 
-
-    private List<Product> products =
-            new ArrayList<>();
-
-
+    private List<CartItem> items;
 
 
 
@@ -39,9 +33,9 @@ public class Invoice {
 
         this.id=id;
 
+        this.date=LocalDate.now();
 
-        this.date =
-                LocalDate.now();
+        this.items=new ArrayList<>();
 
 
     }
@@ -52,13 +46,13 @@ public class Invoice {
 
 
 
-    public void add(Product product){
+    public void addItem(CartItem item){
 
 
-        products.add(product);
+        items.add(item);
 
 
-        total += product.getPrice();
+        total += item.getTotalPrice();
 
 
     }
@@ -73,9 +67,16 @@ public class Invoice {
     public boolean containsProduct(int productId){
 
 
-        return products.stream()
-                .anyMatch(product ->
-                        product.getId()==productId
+
+        return items.stream()
+
+                .anyMatch(item ->
+
+                        item.getProduct()
+                                .getId()
+                                ==
+                                productId
+
                 );
 
 
@@ -118,14 +119,11 @@ public class Invoice {
 
 
 
-    public List<Product> getProducts(){
+    public List<CartItem> getItems(){
 
-        return new ArrayList<>(products);
+        return new ArrayList<>(items);
 
     }
 
 
-    public boolean contains(int productId) {
-        return false;
-    }
 }

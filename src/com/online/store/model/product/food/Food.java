@@ -1,4 +1,4 @@
-package com.online.store.model.product.types;
+package com.online.store.model.product.food;
 
 
 import com.online.store.model.product.Product;
@@ -9,7 +9,6 @@ import com.online.store.model.product.category.Category;
 public class Food extends Product {
 
 
-
     private String productionDate;
 
 
@@ -18,34 +17,29 @@ public class Food extends Product {
 
 
 
-
-
-    public Food(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            String productionDate,
-            String expirationDate
-    ){
+    public Food(int id,
+                String name,
+                double price,
+                int quantity,
+                String productionDate,
+                String expirationDate){
 
 
         super(
                 id,
                 name,
                 price,
-                stock,
+                quantity,
                 Category.FOOD
         );
 
 
-        this.productionDate=productionDate;
+        this.productionDate = productionDate;
 
-        this.expirationDate=expirationDate;
+        this.expirationDate = expirationDate;
 
 
     }
-
 
 
 
@@ -55,7 +49,6 @@ public class Food extends Product {
         return productionDate;
 
     }
-
 
 
 

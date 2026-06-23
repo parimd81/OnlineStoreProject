@@ -2,45 +2,78 @@ package com.online.store.service;
 
 
 import com.online.store.model.product.Product;
+import com.online.store.model.product.category.Category;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 
 public class ProductService {
 
 
-    private List<Product> products =
-            new ArrayList<>();
+    private static ProductService instance;
+
+
+    private List<Product> products;
 
 
 
+    private ProductService(){
+
+        products = new ArrayList<>();
+
+    }
 
 
 
-    public void addProduct(Product product){
+    public static ProductService getInstance(){
+
+        if(instance == null){
+
+            instance = new ProductService();
+
+        }
+
+        return instance;
+
+    }
+
+
+
+    public boolean addProduct(Product product){
+
+
+        if(product == null){
+
+            return false;
+
+        }
+
+
+        if(findById(product.getId()) != null){
+
+            return false;
+
+        }
+
 
         products.add(product);
 
-    }
-
-
-
-
-
-
-    public void removeProduct(int id){
-
-
-        products.removeIf(
-                p -> p.getId()==id
-        );
-
+        return true;
 
     }
 
 
+
+
+
+    public void removeProduct(Product product){
+
+        products.remove(product);
+
+    }
 
 
 
@@ -50,10 +83,76 @@ public class ProductService {
 
 
         return products.stream()
-                .filter(p -> p.getId()==id)
+
+                .filter(p -> p.getId() == id)
+
                 .findFirst()
+
                 .orElse(null);
 
+    }
+
+
+
+
+
+
+    public List<Product> searchByName(String keyword){
+
+
+        return products.stream()
+
+                .filter(p ->
+                        p.getName()
+                                .toLowerCase()
+                                .contains(
+                                        keyword.toLowerCase()
+                                )
+                )
+
+                .collect(Collectors.toList());
+
+    }
+
+
+
+
+
+
+
+    public List<Product> filterByCategory(Category category){
+
+
+        return products.stream()
+
+                .filter(p ->
+                        p.getCategory() == category
+                )
+
+                .collect(Collectors.toList());
+
+    }
+
+
+
+
+
+
+    public List<Product> filterByPriceRange(
+            double min,
+            double max
+    ){
+
+
+        return products.stream()
+
+                .filter(p ->
+                        p.getPrice() >= min
+                                &&
+                                p.getPrice() <= max
+                )
+
+                .collect(Collectors.toList());
 
     }
 
@@ -65,9 +164,10 @@ public class ProductService {
 
     public List<Product> getAllProducts(){
 
-        return products;
+        return new ArrayList<>(products);
 
     }
+
 
 
 }

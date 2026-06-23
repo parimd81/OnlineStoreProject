@@ -1,50 +1,34 @@
 package com.online.store.model.users;
 
 
-import java.util.regex.Pattern;
+import com.online.store.utils.ValidationUtils;
 
 
 public abstract class User {
 
 
     protected String username;
+
     protected String email;
-    protected String phoneNumber;
+
+    protected String phone;
+
     protected String password;
 
     protected Role role;
 
 
-    private static final Pattern EMAIL_REGEX =
-            Pattern.compile("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
-
-
-    private static final Pattern PHONE_REGEX =
-            Pattern.compile("^09\\d{9}$");
-
-
-    private static final Pattern PASSWORD_REGEX =
-            Pattern.compile("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$");
-
-
-
-    public enum Role{
-        CUSTOMER,
-        ADMIN
-    }
-
-
 
     public User(String username,
                 String email,
-                String phoneNumber,
+                String phone,
                 String password,
-                Role role){
+                Role role) {
 
 
         setUsername(username);
         setEmail(email);
-        setPhoneNumber(phoneNumber);
+        setPhone(phone);
         setPassword(password);
 
         this.role = role;
@@ -54,78 +38,114 @@ public abstract class User {
 
 
 
-    public void setUsername(String username){
-
-        this.username=username;
-
-    }
-
-
-
-    public void setEmail(String email){
-
-        if(!EMAIL_REGEX.matcher(email).matches())
-            throw new IllegalArgumentException("Invalid Email");
-
-
-        this.email=email;
-
-    }
-
-
-
-
-    public void setPhoneNumber(String phoneNumber){
-
-        if(!PHONE_REGEX.matcher(phoneNumber).matches())
-            throw new IllegalArgumentException("Invalid Phone");
-
-
-        this.phoneNumber=phoneNumber;
-
-    }
-
-
-
-
-    public void setPassword(String password){
-
-        if(!PASSWORD_REGEX.matcher(password).matches())
-            throw new IllegalArgumentException("Weak Password");
-
-
-        this.password=password;
-
-    }
-
-
-
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
 
 
-    public String getEmail(){
+    public void setUsername(String username) {
+
+        if(username == null || username.isEmpty()){
+
+            throw new IllegalArgumentException(
+                    "Username cannot be empty"
+            );
+
+        }
+
+        this.username = username;
+
+    }
+
+
+
+
+    public String getEmail() {
         return email;
     }
 
 
 
-    public String getPhoneNumber(){
-        return phoneNumber;
+    public void setEmail(String email) {
+
+
+        if(!ValidationUtils.isValidEmail(email)){
+
+            throw new IllegalArgumentException(
+                    "Invalid email format"
+            );
+
+        }
+
+
+        this.email = email;
+
     }
 
 
 
-    public String getPassword(){
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+
+
+    public void setPhone(String phone) {
+
+
+        if(!ValidationUtils.isValidPhone(phone)){
+
+
+            throw new IllegalArgumentException(
+                    "Invalid phone number"
+            );
+
+
+        }
+
+
+        this.phone = phone;
+
+    }
+
+
+
+
+
+
+    public String getPassword() {
         return password;
     }
 
 
+    public void setPassword(String password) {
 
-    public Role getRole(){
-        return role;
+        if(!ValidationUtils.isValidPassword(password)){
+
+            throw new IllegalArgumentException(
+                    "Invalid password format"
+            );
+
+        }
+
+        this.password = password;
+
     }
+
+
+
+
+
+
+    public Role getRole() {
+
+        return role;
+
+    }
+
+
 
 }

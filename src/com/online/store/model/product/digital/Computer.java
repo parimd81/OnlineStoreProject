@@ -1,37 +1,155 @@
 package com.online.store.model.product.digital;
 
+
 public class Computer extends DigitalProduct {
 
-    private String cpuModel;
-    private int ramCapacity;
 
-    public Computer(
-            int id,
-            String name,
-            double price,
-            boolean stock,
-            double weight,
-            String dimensions,
-            String cpuModel,
-            int ramCapacity
-    ) {
-        super(
-                id,
+    private String processorModel;
+
+
+    private int ram;
+
+
+    private SSD storage;
+
+
+
+    public Computer(int id,
+                    String name,
+                    double price,
+                    int quantity,
+                    double weight,
+                    String dimension,
+                    String processorModel,
+                    int ram,
+                    SSD storage) {
+
+
+
+        super(id,
                 name,
                 price,
-                stock,
+                quantity,
                 weight,
-                dimensions
-        );
-        this.cpuModel = cpuModel;
-        this.ramCapacity = ramCapacity;
+                dimension);
+
+
+
+        this.processorModel = processorModel;
+
+        this.ram = ram;
+
+        this.storage = storage;
+
     }
 
-    public String getCpuModel() {
-        return cpuModel;
+
+
+
+
+    public String getProcessorModel(){
+
+        return processorModel;
+
     }
 
-    public int getRamCapacity() {
-        return ramCapacity;
+
+    public void setProcessorModel(String processorModel){
+
+        this.processorModel = processorModel;
+
     }
+
+
+
+
+
+    public int getRam(){
+
+        return ram;
+
+    }
+
+
+    public void setRam(int ram){
+
+        if(ram < 0){
+
+            throw new IllegalArgumentException(
+                    "RAM cannot be negative"
+            );
+
+        }
+
+        this.ram = ram;
+
+    }
+
+
+
+
+
+    public SSD getStorage(){
+
+        return storage;
+
+    }
+
+
+    public void setStorage(SSD storage){
+
+        this.storage = storage;
+
+    }
+
+
+
+
+
+    public int getStorageCapacity(){
+
+        if(storage == null){
+
+            return 0;
+
+        }
+
+        return storage.getCapacity();
+
+    }
+
+
+
+
+
+    public double getReadSpeed(){
+
+        if(storage == null){
+
+            return 0;
+
+        }
+
+        return storage.getReadSpeed();
+
+    }
+
+
+
+
+
+    public double getWriteSpeed(){
+
+        if(storage == null){
+
+            return 0;
+
+        }
+
+        return storage.getWriteSpeed();
+
+    }
+
+
+
 }

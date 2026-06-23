@@ -2,8 +2,10 @@ package com.online.store.model.users;
 
 
 import com.online.store.model.order.Invoice;
+import com.online.store.model.order.ShoppingCart;
 import com.online.store.model.product.Comment;
 import com.online.store.model.product.Rating;
+import com.online.store.model.order.CartItem;
 
 
 import java.util.ArrayList;
@@ -15,11 +17,20 @@ public class Customer extends User {
 
 
 
-    private List<Invoice> invoices = new ArrayList<>();
+    private ShoppingCart cart;
 
-    private List<Comment> comments = new ArrayList<>();
 
-    private List<Rating> ratings = new ArrayList<>();
+    private Account account;
+
+
+    private List<Invoice> invoices;
+
+
+    private List<Comment> comments;
+
+
+    private List<Rating> ratings;
+
 
 
 
@@ -27,12 +38,34 @@ public class Customer extends User {
     public Customer(String username,
                     String email,
                     String phone,
-                    String password){
+                    String password) {
 
 
-        super(username,email,phone,password,Role.CUSTOMER);
+        super(username,
+                email,
+                phone,
+                password,
+                Role.CUSTOMER);
+
+
+
+        cart = new ShoppingCart();
+
+
+        account = new CustomerAccount();
+
+
+
+        invoices = new ArrayList<>();
+
+        comments = new ArrayList<>();
+
+        ratings = new ArrayList<>();
+
 
     }
+
+
 
 
 
@@ -42,10 +75,16 @@ public class Customer extends User {
 
 
         return invoices.stream()
+
                 .anyMatch(invoice ->
-                        invoice.containsProduct(productId));
+                        invoice.containsProduct(productId)
+                );
+
 
     }
+
+
+
 
 
 
@@ -55,6 +94,20 @@ public class Customer extends User {
         invoices.add(invoice);
 
     }
+
+
+
+
+
+
+
+    public void addToCart(CartItem item){
+
+        cart.addItem(item);
+
+    }
+
+
 
 
 
@@ -70,6 +123,8 @@ public class Customer extends User {
 
 
 
+
+
     public void addRating(Rating rating){
 
         ratings.add(rating);
@@ -80,26 +135,75 @@ public class Customer extends User {
 
 
 
-    public List<Invoice> getInvoices(){
 
-        return invoices;
+
+
+    public ShoppingCart getCart(){
+
+        return cart;
 
     }
+
+
+
+
+
+
+
+    public Account getAccount(){
+
+        return account;
+
+    }
+
+
+
+
+
+
+
+    public double getBalance(){
+
+        return account.getBalance();
+
+    }
+
+
+
+
+
+
+
+    public List<Invoice> getInvoices(){
+
+        return new ArrayList<>(invoices);
+
+    }
+
+
+
+
 
 
 
     public List<Comment> getComments(){
 
-        return comments;
+        return new ArrayList<>(comments);
 
     }
+
+
+
+
 
 
 
     public List<Rating> getRatings(){
 
-        return ratings;
+        return new ArrayList<>(ratings);
 
     }
+
+
 
 }

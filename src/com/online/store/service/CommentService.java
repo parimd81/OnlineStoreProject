@@ -23,7 +23,7 @@ public class CommentService {
         Comment comment =
                 new Comment(
                         customer,
-                        product.getId(),
+                        product,
                         text
                 );
 

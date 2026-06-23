@@ -1,13 +1,56 @@
 package com.online.store.model.product.digital;
-public class USBFlash extends DigitalProduct {
+
+
+public class USBFlash extends StorageDevice {
+
 
     private String usbVersion;
-    private int capacity;
 
-    public USBFlash(int id, String n, double p, boolean s,
-                    double w, String d, String v, int c) {
-        super(id, n, p, s, w, d);
-        this.usbVersion = v;
-        this.capacity = c;
+
+
+
+    public USBFlash(int id,
+                    String name,
+                    double price,
+                    int quantity,
+                    double weight,
+                    String dimension,
+                    int capacity,
+                    String usbVersion) {
+
+
+        super(id,
+                name,
+                price,
+                quantity,
+                weight,
+                dimension,
+                capacity);
+
+
+
+        this.usbVersion = usbVersion;
+
+
     }
+
+
+
+
+
+    public String getUsbVersion(){
+
+        return usbVersion;
+
+    }
+
+
+
+    public void setUsbVersion(String usbVersion){
+
+        this.usbVersion = usbVersion;
+
+    }
+
+
 }

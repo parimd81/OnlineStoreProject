@@ -8,6 +8,7 @@ import com.online.store.service.RequestService;
 
 
 
+
 public class AdminController {
 
 
@@ -48,7 +49,11 @@ public class AdminController {
 
     public void deleteProduct(int id){
 
-        productService.removeProduct(id);
+        Product product = productService.findById(id);
+
+        if(product != null){
+            productService.removeProduct(product);
+        }
 
     }
 
