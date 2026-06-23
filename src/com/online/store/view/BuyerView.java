@@ -60,6 +60,7 @@ public class BuyerView {
             System.out.println("9. Add Comment");
             System.out.println("10. Add Rating");
             System.out.println("0. Logout");
+            System.out.println("11. Show Account Information");
 
 
             System.out.print("Choice: ");
@@ -119,6 +120,10 @@ public class BuyerView {
 
                 case 10:
                     addRating();
+                    break;
+
+                case 11:
+                    showAccountInfo();
                     break;
 
 
@@ -588,6 +593,58 @@ public class BuyerView {
             );
 
         }
+
+    }
+
+    private void showAccountInfo(){
+
+
+        System.out.println("\n------ ACCOUNT INFORMATION ------");
+
+
+        System.out.println(
+                "Username: "
+                        +
+                        customer.getUsername()
+        );
+
+
+        System.out.println(
+                "Email: "
+                        +
+                        customer.getEmail()
+        );
+
+
+        System.out.println(
+                "Phone: "
+                        +
+                        customer.getPhone()
+        );
+
+
+        System.out.println(
+                "Balance: "
+                        +
+                        customer.getBalance()
+        );
+
+
+        System.out.println(
+                "Invoices Count: "
+                        +
+                        customer.getInvoices().size()
+        );
+
+
+        System.out.println(
+                "Cart Items: "
+                        +
+                        customer.getCart()
+                                .getItems()
+                                .size()
+        );
+
 
     }
 
