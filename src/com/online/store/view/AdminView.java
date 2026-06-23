@@ -570,9 +570,7 @@ public class AdminView {
 
 
         double weight =
-                Double.parseDouble(
-                        scanner.nextLine()
-                );
+                getDoubleInput("Weight: ");
 
 
         System.out.print(
@@ -994,9 +992,7 @@ public class AdminView {
 
 
                 double volume =
-                        Double.parseDouble(
-                                scanner.nextLine()
-                        );
+                        getDoubleInput("Engine Volume: ");
 
 
 
@@ -1654,11 +1650,37 @@ public class AdminView {
                         "Enter a valid price: "
                 );
 
+
+
+
             }
 
         }
 
     }
 
+    private double getDoubleInput(String message){
 
+        while(true){
+
+            try{
+
+                System.out.print(message);
+
+                return Double.parseDouble(
+                        scanner.nextLine()
+                );
+
+            }
+            catch(Exception e){
+
+                System.out.println(
+                        "Enter a valid number"
+                );
+
+            }
+
+        }
+
+    }
 }

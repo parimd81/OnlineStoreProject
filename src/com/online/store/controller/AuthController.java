@@ -1,6 +1,8 @@
 package com.online.store.controller;
 
 
+import com.online.store.model.request.Request;
+import com.online.store.model.request.RequestManager;
 import com.online.store.model.users.Admin;
 import com.online.store.model.users.Customer;
 import com.online.store.model.users.User;
@@ -18,17 +20,32 @@ public class AuthController {
             new ArrayList<>();
 
 
+    private RequestManager requestManager =
+            new RequestManager();
+
+
+
+    private int nextRequestId = 1;
+
+
+
     private User currentUser;
+
 
 
 
     public AuthController(){
 
 
-        users.add(Admin.getInstance());
+        users.add(
+                Admin.getInstance()
+        );
 
 
     }
+
+
+
 
 
 
@@ -42,18 +59,29 @@ public class AuthController {
             String password
     ){
 
+
+
         // check duplicate username
+
         for(User user : users){
 
-            if(user.getUsername().equals(username)){
+
+            if(user.getUsername()
+                    .equals(username)){
+
 
                 throw new IllegalArgumentException(
                         "Username already exists"
                 );
 
+
             }
 
+
         }
+
+
+
 
 
         Customer customer =
@@ -65,12 +93,41 @@ public class AuthController {
                 );
 
 
+
+
+
+
+        // ساخت درخواست ثبت نام
+
+        Request request =
+                new Request(
+                        nextRequestId++,
+                        customer,
+                        "New customer registration"
+                );
+
+
+
+        requestManager.addRequest(request);
+
+
+
+
+
+        // فعلاً برای تست نگه می‌داریم
+        // بعد از approve باید اضافه شود
+
         users.add(customer);
+
+
 
 
         return customer;
 
+
     }
+
+
 
 
 
@@ -84,6 +141,7 @@ public class AuthController {
     ){
 
 
+
         for(User user : users){
 
 
@@ -94,13 +152,18 @@ public class AuthController {
                             .equals(password)){
 
 
-                currentUser=user;
+
+                currentUser = user;
+
 
                 return true;
 
+
             }
 
+
         }
+
 
 
         return false;
@@ -114,20 +177,46 @@ public class AuthController {
 
 
 
+
     public User getCurrentUser(){
+
 
         return currentUser;
 
+
     }
+
+
+
+
+
 
 
 
 
     public List<User> getUsers(){
 
+
         return users;
 
+
     }
+
+
+
+
+
+
+
+
+    public RequestManager getRequestManager(){
+
+
+        return requestManager;
+
+
+    }
+
 
 
 }
